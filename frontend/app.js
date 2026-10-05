@@ -128,7 +128,7 @@
     showScreen("resultsScreen");
 
     try {
-      if (!profilePayload) profilePayload = profileFromForm();
+      profilePayload = profileFromForm();
       const data = await api("/api/recommendations", {
         method:"POST",
         body:JSON.stringify(profilePayload)
@@ -136,11 +136,20 @@
       recommendations = data.recommendations || [];
       if (!recommendations.length) throw new Error("No recommendations matched the current filters. Try widening your duration, location or evidence filters.");
       renderRecommendations(recommendations);
+      if (data.learner_query_summary?.filters_relaxed) {
+        toast("Top matching pathways shown nationally (precision filters relaxed).");
+      }
       $("resultsLoading").classList.add("hidden");
       $("resultsContent").classList.remove("hidden");
     } catch (err) {
       $("resultsLoading").classList.add("hidden");
       $("resultsError").classList.remove("hidden");
+      const titleEl = $("resultsErrorTitle");
+      if (titleEl) {
+        titleEl.textContent = err.message.includes("filters")
+          ? "No qualifications matched your specific filters."
+          : "We couldn't generate your recommendations.";
+      }
       $("resultsErrorText").textContent = err.message;
     }
   }
@@ -409,7 +418,10 @@
   document.querySelectorAll("[data-home]").forEach(btn => btn.addEventListener("click", () => showScreen("homeScreen")));
   document.querySelectorAll("[data-go]").forEach(btn => btn.addEventListener("click", () => showScreen(btn.dataset.go)));
   $("startBtn").addEventListener("click", () => showScreen("intakeScreen"));
-  $("editProfileBtn").addEventListener("click", () => showScreen("intakeScreen"));
+  $("editProfileBtn").addEventListener("click", () => {
+    profilePayload = null;
+    showScreen("intakeScreen");
+  });
   $("backToResults").addEventListener("click", () => showScreen("resultsScreen"));
   $("backFromChat").addEventListener("click", () => showScreen(previousScreen));
   $("resultsChatBtn").addEventListener("click", () => openChat());
@@ -423,7 +435,24 @@
     profilePayload = profileFromForm();
     await generateRecommendations();
   });
-  $("retryResults").addEventListener("click", generateRecommendations);
+  $("retryResults").addEventListener("click", () => {
+    profilePayload = null;
+    showScreen("intakeScreen");
+    $("advancedFields").classList.remove("hidden");
+    const toggle = $("advancedToggle")?.lastElementChild;
+    if (toggle) toggle.textContent = "−";
+  });
+  $("resetFiltersBtn")?.addEventListener("click", async () => {
+    $("excludeIneligible").checked = false;
+    $("excludeUnknownLocation").checked = false;
+    $("excludeUnknownFees").checked = false;
+    $("maxDuration").value = "";
+    $("maxBudget").value = "";
+    $("relocation").value = "nationally";
+    toast("Precision filters relaxed. Searching top pathways nationally...");
+    profilePayload = profileFromForm();
+    await generateRecommendations();
+  });
 
   $("advancedToggle").addEventListener("click", () => {
     const panel = $("advancedFields");

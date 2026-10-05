@@ -136,10 +136,10 @@
               <div class="field">
                 <label for="relocation">Willingness to relocate</label>
                 <select id="relocation">
-                  <option value="near_home">Near home only</option>
-                  <option value="within_district">Within district</option>
+                  <option value="nationally">Willing to relocate nationally (All 107 paths)</option>
                   <option value="state_capital">Statewide / capital</option>
-                  <option value="nationally">Willing to relocate nationally</option>
+                  <option value="within_district">Within district</option>
+                  <option value="near_home">Near home only</option>
                 </select>
               </div>
               <div class="field">
@@ -198,9 +198,12 @@
       </div>
 
       <div id="resultsError" class="message-panel error-panel hidden">
-        <strong>We couldn't generate your recommendations.</strong>
-        <p id="resultsErrorText">Check that the backend is running on port 8000.</p>
-        <button id="retryResults" class="outline-button">Try again</button>
+        <strong id="resultsErrorTitle">We couldn't generate your recommendations.</strong>
+        <p id="resultsErrorText">No recommendations matched the current filters. Try widening your duration, location or evidence filters.</p>
+        <div class="error-actions" style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;">
+          <button id="resetFiltersBtn" class="green-button dark-text" type="button" style="padding:9px 18px;font-size:13px;">Show all matching paths nationally ↗</button>
+          <button id="retryResults" class="outline-button" type="button" style="padding:9px 18px;font-size:13px;">Edit profile & filters ←</button>
+        </div>
       </div>
 
       <div id="resultsContent" class="hidden">

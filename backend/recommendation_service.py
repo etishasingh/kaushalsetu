@@ -174,7 +174,58 @@ class RecommendationService:
         else:
             retrieval_sims = lex_sims
 
-        # Candidate evaluation
+        # Candidate evaluation with graceful fallback
+        candidate_cards = self._evaluate_candidates(
+            retrieval_sims, query_tokens, clean_q, request, weights, relax_filters=False
+        )
+        filters_relaxed = False
+
+        # If strict location, duration, budget or unknown-data filters pruned all 107 candidates,
+        # gracefully relax constraints so the learner is never stranded with an empty results screen
+        # (unless caller explicitly requested strict exclusion of unknown eligibility as in benchmarks).
+        if not candidate_cards and not request.exclude_unknown_eligibility:
+            candidate_cards = self._evaluate_candidates(
+                retrieval_sims, query_tokens, clean_q, request, weights, relax_filters=True
+            )
+            filters_relaxed = True
+
+        # Sort descending by hybrid score
+        candidate_cards = sorted(candidate_cards, key=lambda c: c.hybrid_score, reverse=True)
+        top_cards = candidate_cards[:request.top_k]
+
+        limitations = [
+            "Cosine similarity is an information retrieval measure of vocabulary overlap, not a guarantee of employment success.",
+            "92.5% of qualifications in this sample do not have linked private/public training centres; local availability requires SIDH verification.",
+            "Survey wage figures represent macro-level administrative medians, not guaranteed individual starting salaries."
+        ]
+        if filters_relaxed:
+            limitations.insert(0, "Notice: No qualifications matched all strict precision/location constraints in our sample. Filters were relaxed to display the top matching vocational pathways nationally.")
+
+        return RecommendationResponse(
+            total_candidates_evaluated=len(self.catalogue),
+            results_returned=len(top_cards),
+            recommendations=top_cards,
+            learner_query_summary={
+                'interests': request.interests,
+                'activities': request.preferred_activities,
+                'education': request.existing_qualification,
+                'experience_years': request.prior_experience_years,
+                'location': f"{request.current_district}, {request.current_state}" if request.current_district else "Unspecified",
+                'filters_relaxed': filters_relaxed
+            },
+            scoring_weights_used=weights,
+            system_limitations=limitations
+        )
+
+    def _evaluate_candidates(
+        self,
+        retrieval_sims: np.ndarray,
+        query_tokens: set,
+        clean_q: str,
+        request: LearnerProfileRequest,
+        weights: dict,
+        relax_filters: bool = False
+    ) -> List[RecommendationCard]:
         candidate_cards = []
         for idx in range(len(self.catalogue)):
             row = self.catalogue.iloc[idx]
@@ -204,23 +255,24 @@ class RecommendationService:
                 max_budget_inr=request.max_budget_inr
             )
 
-            # Filtering on confirmed ineligibility (excluded if learner opts to prune ineligible options)
-            if request.exclude_ineligible and elig_status == 'INELIGIBLE':
-                continue
-            if loc_status == 'INELIGIBLE':
-                continue
-            if dur_status == 'INELIGIBLE':
-                continue
-            if fee_status == 'INELIGIBLE':
-                continue
+            if not relax_filters:
+                # Filtering on confirmed ineligibility (excluded if learner opts to prune ineligible options)
+                if request.exclude_ineligible and elig_status == 'INELIGIBLE':
+                    continue
+                if loc_status == 'INELIGIBLE':
+                    continue
+                if dur_status == 'INELIGIBLE':
+                    continue
+                if fee_status == 'INELIGIBLE':
+                    continue
 
-            # Filtering on UNKNOWN status only if user explicitly configured strict exclusion
-            if request.exclude_unknown_eligibility and elig_status == 'UNKNOWN':
-                continue
-            if request.exclude_unknown_location and loc_status == 'UNKNOWN':
-                continue
-            if request.exclude_unknown_fees and fee_status == 'UNKNOWN':
-                continue
+                # Filtering on UNKNOWN status only if user explicitly configured strict exclusion
+                if request.exclude_unknown_eligibility and elig_status == 'UNKNOWN':
+                    continue
+                if request.exclude_unknown_location and loc_status == 'UNKNOWN':
+                    continue
+                if request.exclude_unknown_fees and fee_status == 'UNKNOWN':
+                    continue
 
             # Calculate individual normalized score components
             s_text = float(np.clip(text_score, 0.0, 1.0))
@@ -228,6 +280,15 @@ class RecommendationService:
             s_pref = float(np.clip(self._score_preference_match(row, request), 0.0, 1.0))
             s_elig = 1.0 if elig_status == 'ELIGIBLE' else (0.50 if elig_status == 'UNKNOWN' else 0.0)
             s_evid = float(np.clip(self._score_evidence_completeness(row), 0.0, 1.0))
+
+            if relax_filters:
+                # In relaxed mode, slightly adjust score for non-matching constraints so better matches rank higher
+                if loc_status == 'INELIGIBLE':
+                    s_pref *= 0.7
+                if dur_status == 'INELIGIBLE':
+                    s_pref *= 0.7
+                if fee_status == 'INELIGIBLE':
+                    s_pref *= 0.7
 
             hybrid_score = (
                 weights.get('text_relevance', 0.40) * s_text +
@@ -246,6 +307,8 @@ class RecommendationService:
                 missing_info.append("Exact course fee unverified; check if PMKVY 4.0 government subsidy applies.")
             if "No direct active vacancy" in str(row.get('live_job_evidence', '')):
                 missing_info.append("No active sample vacancy scraped; verify live hiring on NCS portal.")
+            if relax_filters and loc_status == 'INELIGIBLE':
+                missing_info.append(f"No direct training centre in {request.current_district} in current sample; national pathway shown.")
 
             card_dict = {
                 'qualification_id': str(row['qualification_id']),
@@ -303,30 +366,7 @@ class RecommendationService:
 
             candidate_cards.append(RecommendationCard(**card_dict))
 
-        # Sort descending by hybrid score
-        candidate_cards = sorted(candidate_cards, key=lambda c: c.hybrid_score, reverse=True)
-        top_cards = candidate_cards[:request.top_k]
-
-        limitations = [
-            "Cosine similarity is an information retrieval measure of vocabulary overlap, not a guarantee of employment success.",
-            "92.5% of qualifications in this sample do not have linked private/public training centres; local availability requires SIDH verification.",
-            "Survey wage figures represent macro-level administrative medians, not guaranteed individual starting salaries."
-        ]
-
-        return RecommendationResponse(
-            total_candidates_evaluated=len(self.catalogue),
-            results_returned=len(top_cards),
-            recommendations=top_cards,
-            learner_query_summary={
-                'interests': request.interests,
-                'activities': request.preferred_activities,
-                'education': request.existing_qualification,
-                'experience_years': request.prior_experience_years,
-                'location': f"{request.current_district}, {request.current_state}" if request.current_district else "Unspecified"
-            },
-            scoring_weights_used=weights,
-            system_limitations=limitations
-        )
+        return candidate_cards
 
     def get_career_by_id(self, qualification_id: str) -> Optional[RecommendationCard]:
         """Retrieves details for a single qualification by ID."""
