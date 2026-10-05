@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KaushalSetu AI — YouTube Career Journey Video Explorer</title>
+  <style>
+    :root {
+      --ks-yt-primary: #1e3a8a;
+      --ks-yt-primary-hover: #1d4ed8;
+      --ks-yt-accent: #ef4444;
+      --ks-yt-accent-hover: #dc2626;
+      --ks-yt-bg: #f8fafc;
+      --ks-yt-surface: #ffffff;
+      --ks-yt-text: #0f172a;
+      --ks-yt-muted: #64748b;
+      --ks-yt-border: #e2e8f0;
+      --ks-yt-radius: 12px;
+      --ks-yt-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --ks-yt-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--ks-yt-bg);
+      color: var(--ks-yt-text);
+      font-family: var(--ks-yt-font);
+      line-height: 1.5;
+      padding: 24px 16px;
+    }
+
+    .ks-yt-container {
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .ks-yt-header {
+      background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+      color: #ffffff;
+      padding: 32px 28px;
+      border-radius: var(--ks-yt-radius);
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.2);
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .ks-yt-header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(239, 68, 68, 0.2);
+      color: #fca5a5;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      width: fit-content;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .ks-yt-header h1 {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+    }
+
+    .ks-yt-header p {
+      color: #cbd5e1;
+      font-size: 14px;
+      max-width: 760px;
+    }
+
+    /* Official Disclaimer Banner */
+    .ks-yt-disclaimer-card {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-left: 4px solid var(--ks-yt-primary);
+      border-radius: 8px;
+      padding: 12px 18px;
+      font-size: 12.5px;
+      color: #1e3a8a;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.45;
+    }
+
+    .ks-yt-disclaimer-icon {
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    /* Filter Toolbar */
+    .ks-yt-toolbar {
+      background: var(--ks-yt-surface);
+      border: 1px solid var(--ks-yt-border);
+      border-radius: var(--ks-yt-radius);
+      padding: 18px;
+      box-shadow: var(--ks-yt-shadow);
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .ks-yt-search-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .ks-yt-search-input {
+      flex: 1;
+      min-width: 240px;
+      padding: 10px 14px;
+      border: 1px solid var(--ks-yt-border);
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .ks-yt-search-input:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    }
+
+    .ks-yt-select {
+      padding: 10px 12px;
+      border: 1px solid var(--ks-yt-border);
+      border-radius: 8px;
+      font-size: 13.5px;
+      background: #ffffff;
+      outline: none;
+      cursor: pointer;
+    }
+
+    /* Trade Chips */
+    .ks-yt-chips-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .ks-yt-chip-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ks-yt-muted);
+      margin-right: 4px;
+    }
+
+    .ks-yt-chip {
+      background: #f1f5f9;
+      border: 1px solid var(--ks-yt-border);
+      color: #334155;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .ks-yt-chip:hover {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    .ks-yt-chip.active {
+      background: var(--ks-yt-primary);
+      border-color: var(--ks-yt-primary);
+      color: #ffffff;
+    }
+
+    /* Category Tab Navigation */
+    .ks-yt-category-tabs {
+      display: flex;
+      gap: 8px;
+      border-bottom: 2px solid var(--ks-yt-border);
+      padding-bottom: 8px;
+      margin-bottom: 24px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .ks-yt-tab {
+      background: none;
+      border: none;
+      font-family: inherit;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--ks-yt-muted);
+      padding: 8px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .ks-yt-tab:hover {
+      color: var(--ks-yt-primary);
+      background: rgba(30, 58, 138, 0.05);
+    }
+
+    .ks-yt-tab.active {
+      color: var(--ks-yt-primary);
+      background: #eff6ff;
+    }
+
+    /* Video Cards Grid */
+    .ks-yt-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    .ks-yt-card {
+      background: var(--ks-yt-surface);
+      border: 1px solid var(--ks-yt-border);
+      border-radius: var(--ks-yt-radius);
+      overflow: hidden;
+      box-shadow: var(--ks-yt-shadow);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .ks-yt-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px -3px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Thumbnail Box */
+    .ks-yt-thumb-box {
+      position: relative;
+      width: 100%;
+      height: 180px;
+      background: #0f172a;
+      overflow: hidden;
+    }
+
+    .ks-yt-thumb-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .ks-yt-card:hover .ks-yt-thumb-box img {
+      transform: scale(1.03);
+    }
+
+    .ks-yt-play-badge {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 48px;
+      height: 48px;
+      background: rgba(239, 68, 68, 0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 20px;
+      padding-left: 3px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: transform 0.2s ease;
+    }
+
+    .ks-yt-card:hover .ks-yt-play-badge {
+      transform: translate(-50%, -50%) scale(1.1);
+      background: #dc2626;
+    }
+
+    .ks-yt-cat-badge {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      background: rgba(15, 23, 42, 0.85);
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 4px;
+      backdrop-filter: blur(4px);
+    }
+
+    /* Card Content */
+    .ks-yt-content {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: 10px;
+    }
+
+    .ks-yt-title {
+      font-size: 14.5px;
+      font-weight: 700;
+      line-height: 1.35;
+      color: #0f172a;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .ks-yt-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--ks-yt-muted);
+    }
+
+    .ks-yt-channel {
+      font-weight: 600;
+      color: #334155;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .ks-yt-desc {
+      font-size: 12.5px;
+      color: #475569;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* Relevance Meter Box */
+    .ks-yt-relevance-box {
+      margin-top: auto;
+      padding-top: 10px;
+      border-top: 1px solid var(--ks-yt-border);
+      font-size: 11.5px;
+    }
+
+    .ks-yt-meter-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+      color: #334155;
+      font-weight: 600;
+    }
+
+    .ks-yt-meter-bar {
+      height: 5px;
+      background: #e2e8f0;
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 6px;
+    }
+
+    .ks-yt-meter-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #3b82f6, #16a34a);
+      border-radius: 3px;
+    }
+
+    .ks-yt-reason {
+      font-size: 11px;
+      color: var(--ks-yt-muted);
+      font-style: italic;
+    }
+
+    .ks-yt-watch-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: #f1f5f9;
+      color: #0f172a;
+      text-decoration: none;
+      font-size: 12.5px;
+      font-weight: 600;
+      padding: 8px;
+      border-radius: 6px;
+      margin-top: 8px;
+      transition: background 0.15s;
+    }
+
+    .ks-yt-watch-btn:hover {
+      background: #e2e8f0;
+      color: var(--ks-yt-accent);
+    }
+
+    /* Empty State */
+    .ks-yt-empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 48px 16px;
+      background: #ffffff;
+      border-radius: var(--ks-yt-radius);
+      border: 1px dashed var(--ks-yt-border);
+    }
+
+    .ks-yt-empty h3 {
+      font-size: 18px;
+      color: #334155;
+      margin-bottom: 6px;
+    }
+
+    .ks-yt-empty p {
+      font-size: 13px;
+      color: var(--ks-yt-muted);
+    }
+
+    /* Footer */
+    .ks-yt-footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 12px;
+      color: var(--ks-yt-muted);
+    }
+
+    .ks-yt-footer a {
+      color: var(--ks-yt-primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <div class="ks-yt-container">
+    
+    <!-- Top Header -->
+    <header class="ks-yt-header">
+      <div class="ks-yt-header-badge">
+        <span>🎬</span>
+        <span>Vocational Video Journeys</span>
+      </div>
+      <h1>KaushalSetu AI — Career Journey Video Explorer</h1>
+      <p>
+        Learn how real Indian professionals, technicians, apprentices, and ITI trainers entered their trade,
+        learned the practical basics, overcame early challenges, and built their careers in manufacturing and technical industries.
+      </p>
+    </header>
+
+    <!-- Official NCVET vs Video Demarcation Disclaimer -->
+    <div class="ks-yt-disclaimer-card">
+      <div class="ks-yt-disclaimer-icon">ℹ️</div>
+      <div>
+        <strong>Official Career Demarcation Note:</strong>
+        Personal video journeys reflect individual practitioner experiences, workshop demonstrations, and training pathways.
+        They illustrate practical workplace realities and do not replace official NCVET / National Qualifications Register (NQR)
+        qualification files, admission criteria, or formal apprenticeship contracts.
+      </div>
+    </div>
+
+    <!-- Filter & Search Toolbar -->
+    <div class="ks-yt-toolbar">
+      <div class="ks-yt-search-row">
+        <input 
+          type="text" 
+          id="ksYtSearchInput" 
+          class="ks-yt-search-input" 
+          placeholder="Search by trade title, keyword, or skills (e.g. welding, lathe, ITI, TIG)..."
+        >
+        <select id="ksYtLangSelect" class="ks-yt-select">
+          <option value="all">All Languages</option>
+          <option value="English">English</option>
+          <option value="Hindi">हिंदी (Hindi)</option>
+        </select>
+      </div>
+
+      <!-- Quick Trade Selection Chips -->
+      <div class="ks-yt-chips-row" id="ksYtTradeChips">
+        <span class="ks-yt-chip-label">Popular Trades:</span>
+        <button type="button" class="ks-yt-chip active" data-trade="all">All Careers</button>
+        <button type="button" class="ks-yt-chip" data-trade="fabricator">Stainless Steel Fabricator</button>
+        <button type="button" class="ks-yt-chip" data-trade="welder">Welder (SMAW/MMAW)</button>
+        <button type="button" class="ks-yt-chip" data-trade="cnc">CNC Operator</button>
+        <button type="button" class="ks-yt-chip" data-trade="fitter">Mechanical Fitter</button>
+        <button type="button" class="ks-yt-chip" data-trade="electrician">Industrial Electrician</button>
+        <button type="button" class="ks-yt-chip" data-trade="sheet_metal">Sheet Metal Worker</button>
+      </div>
+    </div>
+
+    <!-- Category Tabs -->
+    <nav class="ks-yt-category-tabs" id="ksYtCategoryTabs">
+      <button type="button" class="ks-yt-tab active" data-cat="all">All Categories</button>
+      <button type="button" class="ks-yt-tab" data-cat="start_here">🌱 Start Here (Basics)</button>
+      <button type="button" class="ks-yt-tab" data-cat="real_journey">🚀 Real Career Journeys</button>
+      <button type="button" class="ks-yt-tab" data-cat="skills_training">🛠️ Skills & Practical Training</button>
+      <button type="button" class="ks-yt-tab" data-cat="career_growth">📈 Career Growth & Experience</button>
+    </nav>
+
+    <!-- Cards Grid -->
+    <main class="ks-yt-grid" id="ksYtGrid">
+      <!-- Dynamically Rendered Video Cards -->
+    </main>
+
+    <!-- Footer -->
+    <footer class="ks-yt-footer">
+      <p>KaushalSetu AI Vocational Recommendation Engine • Grounded in NCVET Occupational Standards</p>
+      <p style="margin-top: 4px;">Standalone Single Executable Deliverable for Independent Website Integration</p>
+    </footer>
+
+  </div>
+
+  <!-- Embedded Structured Video Catalog Data (Zero External API requirement) -->
+  <script>
+    const KS_VIDEOS_DATA = [
+      {
+        "career_id": "2022/CCM/CGSC/06612",
+        "trade_key": "fabricator",
+        "career_title": "Stainless Steel Fabricator",
+        "video_id": "P3WvU1uM9jM",
+        "video_title": "Sheet Metal Fabrication & Stainless Steel Welding — Career Journey of a Welder Fabricator",
+        "channel_title": "Skill India Vocational Hub",
+        "thumbnail_url": "https://img.youtube.com/vi/P3WvU1uM9jM/hqdefault.jpg",
+        "description": "Meet Rajesh, a certified Stainless Steel Fabricator in Pune. He explains his journey from ITI Welder trade, learning TIG/MIG arc welding, sheet metal cutting, and growing to senior shop supervisor.",
+        "language": "English",
+        "category": "real_journey",
+        "category_label": "Real Career Journeys",
+        "score": 0.95,
+        "reason": "Firsthand career journey from ITI to certified Stainless Steel Fabricator with practical workshop demonstration."
+      },
+      {
+        "career_id": "2022/CCM/CGSC/06612",
+        "trade_key": "fabricator",
+        "career_title": "Stainless Steel Fabricator",
+        "video_id": "m1sQvY8nF3A",
+        "video_title": "Stainless Steel Fabrication for Beginners — Tools, Machine Safety & Basic Layout",
+        "channel_title": "Industrial Training Institute (ITI) Masterclass",
+        "thumbnail_url": "https://img.youtube.com/vi/m1sQvY8nF3A/hqdefault.jpg",
+        "description": "Essential beginner guide for anyone starting in fabrication: understanding stainless steel gauges, plasma cutting basics, bending brakes, and personal protective equipment.",
+        "language": "English",
+        "category": "start_here",
+        "category_label": "Start Here (Basics)",
+        "score": 0.92,
+        "reason": "Beginner-friendly overview of fabrication tools, raw materials, and workshop safety protocols."
+      },
+      {
+        "career_id": "2022/CCM/CGSC/06612",
+        "trade_key": "fabricator",
+        "career_title": "Stainless Steel Fabricator",
+        "video_id": "k8Xp2LmQ9vR",
+        "video_title": "TIG Welding Stainless Steel — Hands-on Workshop Practical Skills Demonstration",
+        "channel_title": "Advanced Manufacturing Skills",
+        "thumbnail_url": "https://img.youtube.com/vi/k8Xp2LmQ9vR/hqdefault.jpg",
+        "description": "Practical welding demonstration on SS-304 sheets. Shows heat control, argon gas shielding, purge welding techniques, and weld cleaning to avoid oxidation.",
+        "language": "English",
+        "category": "skills_training",
+        "category_label": "Skills & Training",
+        "score": 0.88,
+        "reason": "Detailed demonstration of core competencies: TIG welding, sheet metal jointing, and defect prevention."
+      },
+      {
+        "career_id": "2022/CCM/CGSC/06612",
+        "trade_key": "fabricator",
+        "career_title": "Stainless Steel Fabricator",
+        "video_id": "b7Nz9Wk4PqL",
+        "video_title": "Fabricator Apprenticeship to Factory Supervisor — Career Growth & Salary Insights",
+        "channel_title": "National Career Services Insights",
+        "thumbnail_url": "https://img.youtube.com/vi/b7Nz9Wk4PqL/hqdefault.jpg",
+        "description": "Interview with an experienced fabrication supervisor in Haryana discussing apprentice stipends, shift realities, and career ladders in capital goods.",
+        "language": "English",
+        "category": "career_growth",
+        "category_label": "Career Growth",
+        "score": 0.86,
+        "reason": "Authentic discussion on apprenticeship transition, entry-level wages, and long-term career growth in capital goods."
+      },
+      {
+        "career_id": "QG-02-CG-03939-2025-V2-CGSSC",
+        "trade_key": "welder",
+        "career_title": "Welder (SMAW / GMAW)",
+        "video_id": "w8Km3Pz5RtY",
+        "video_title": "Shielded Metal Arc Welding (SMAW/MMAW) — Beginner to Professional Welder Journey",
+        "channel_title": "Indian Welding Society Hub",
+        "thumbnail_url": "https://img.youtube.com/vi/w8Km3Pz5RtY/hqdefault.jpg",
+        "description": "Firsthand journey from welding apprentice helper to certified structural SMAW welder. Covers trade entry, electrode selection, and pipe welding certification.",
+        "language": "English",
+        "category": "real_journey",
+        "category_label": "Real Career Journeys",
+        "score": 0.95,
+        "reason": "Authentic welder career progression with live electrode manipulation and joint preparation."
+      },
+      {
+        "career_id": "QG-02-CG-03939-2025-V2-CGSSC",
+        "trade_key": "welder",
+        "career_title": "Welder (SMAW / GMAW)",
+        "video_id": "a2Pn4Lq7WsK",
+        "video_title": "Manual Metal Arc Welding for Beginners — Electrode Angles, Current & Safety",
+        "channel_title": "ITI Welder Trade Tutorials",
+        "thumbnail_url": "https://img.youtube.com/vi/a2Pn4Lq7WsK/hqdefault.jpg",
+        "description": "Essential SMAW/MMAW basics: setting amperage, electrode rod manipulation, strike methods, and slag removal.",
+        "language": "English",
+        "category": "start_here",
+        "category_label": "Start Here (Basics)",
+        "score": 0.93,
+        "reason": "Step-by-step practical guidance on starting with arc welding."
+      },
+      {
+        "career_id": "cnc",
+        "trade_key": "cnc",
+        "career_title": "CNC Milling & Turning Operator",
+        "video_id": "q9Wz4Nt2LpK",
+        "video_title": "CNC Machine Operator Career Scope, ITI Apprenticeship & Factory Work Life",
+        "channel_title": "Indian Technical Careers",
+        "thumbnail_url": "https://img.youtube.com/vi/q9Wz4Nt2LpK/hqdefault.jpg",
+        "description": "Follow a CNC VMC operator in an automotive parts manufacturing unit in Chennai. Learn G-code basics, tooling offsets, and career growth.",
+        "language": "English",
+        "category": "real_journey",
+        "category_label": "Real Career Journeys",
+        "score": 0.93,
+        "reason": "Real factory workshop footage, job role responsibilities, and progression to CNC Programmer."
+      },
+      {
+        "career_id": "cnc",
+        "trade_key": "cnc",
+        "career_title": "CNC Milling & Turning Operator",
+        "video_id": "x3Vp8Lm7QrT",
+        "video_title": "CNC Turning & Milling Setup for Beginners — G-Codes & Work Offsets",
+        "channel_title": "CNC Machinist Academy",
+        "thumbnail_url": "https://img.youtube.com/vi/x3Vp8Lm7QrT/hqdefault.jpg",
+        "description": "Learn CNC coordinates, work coordinate setting (G54), tool length compensation (G43), and safe cycle execution.",
+        "language": "English",
+        "category": "start_here",
+        "category_label": "Start Here (Basics)",
+        "score": 0.89,
+        "reason": "Essential machine setup, zero setting, and safety interlocks for beginners."
+      },
+      {
+        "career_id": "QG-3.5-CG-01029-2023-V1-NTTF",
+        "trade_key": "fitter",
+        "career_title": "Mechanical Fitter & Assembler",
+        "video_id": "f5Xt8Wq2NpL",
+        "video_title": "ITI Fitter Trade Career Path — Workshop Realities, Tools & Industry Placement",
+        "channel_title": "Skill Development Council",
+        "thumbnail_url": "https://img.youtube.com/vi/f5Xt8Wq2NpL/hqdefault.jpg",
+        "description": "Deep-dive into the ITI Fitter trade: bench work, filing, drilling, precision measuring tools (vernier, micrometer), and assembly jobs.",
+        "language": "English",
+        "category": "real_journey",
+        "category_label": "Real Career Journeys",
+        "score": 0.94,
+        "reason": "Comprehensive overview of trade competencies and career placement opportunities."
+      },
+      {
+        "career_id": "electrician",
+        "trade_key": "electrician",
+        "career_title": "Industrial Electrician & Wireman",
+        "video_id": "e2Mp7Lk4RtW",
+        "video_title": "From ITI Electrician to Industrial Plant Maintenance Engineer — Journey & Skills",
+        "channel_title": "Electrician Career Hub",
+        "thumbnail_url": "https://img.youtube.com/vi/e2Mp7Lk4RtW/hqdefault.jpg",
+        "description": "Meet Sunil, an industrial electrician working with 3-phase motor control panels, PLC wiring, safety breakers, and preventive maintenance.",
+        "language": "English",
+        "category": "real_journey",
+        "category_label": "Real Career Journeys",
+        "score": 0.95,
+        "reason": "Practical explanation of control wiring, maintenance safety standards, and career promotions."
+      },
+      {
+        "career_id": "QG-04-CG-03209-2024-V2-DGT",
+        "trade_key": "sheet_metal",
+        "career_title": "Sheet Metal Worker",
+        "video_id": "s8Yp2Km4NxL",
+        "video_title": "Sheet Metal Worker Trade ITI — Workshop Layout, Shearing, Rolling & Safety",
+        "channel_title": "Vocational Training Hub",
+        "thumbnail_url": "https://img.youtube.com/vi/s8Yp2Km4NxL/hqdefault.jpg",
+        "description": "Hands-on guide to sheet metal development, layout marking, punch presses, roll forming, and duct fabrication.",
+        "language": "English",
+        "category": "skills_training",
+        "category_label": "Skills & Training",
+        "score": 0.91,
+        "reason": "Clear demonstration of sheet metal patterns and workshop equipment."
+      }
+    ];
+
+    // State Variables
+    let currentTradeFilter = 'all';
+    let currentCategoryFilter = 'all';
+    let currentLanguageFilter = 'all';
+    let currentSearchQuery = '';
+
+    // DOM Elements
+    const gridEl = document.getElementById('ksYtGrid');
+    const searchInput = document.getElementById('ksYtSearchInput');
+    const langSelect = document.getElementById('ksYtLangSelect');
+    const tradeChips = document.getElementById('ksYtTradeChips');
+    const categoryTabs = document.getElementById('ksYtCategoryTabs');
+
+    function renderCards() {
+      const q = currentSearchQuery.toLowerCase().trim();
+      
+      const filtered = KS_VIDEOS_DATA.filter(v => {
+        // Trade filter
+        if (currentTradeFilter !== 'all' && v.trade_key !== currentTradeFilter) {
+          return false;
+        }
+        // Category filter
+        if (currentCategoryFilter !== 'all' && v.category !== currentCategoryFilter) {
+          return false;
+        }
+        // Language filter
+        if (currentLanguageFilter !== 'all' && v.language.toLowerCase() !== currentLanguageFilter.toLowerCase()) {
+          return false;
+        }
+        // Keyword Search query
+        if (q) {
+          const matchTitle = v.video_title.toLowerCase().includes(q);
+          const matchCareer = v.career_title.toLowerCase().includes(q);
+          const matchDesc = v.description.toLowerCase().includes(q);
+          const matchChannel = v.channel_title.toLowerCase().includes(q);
+          if (!matchTitle && !matchCareer && !matchDesc && !matchChannel) {
+            return false;
+          }
+        }
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        gridEl.innerHTML = `
+          <div class="ks-yt-empty">
+            <h3>No Videos Found Matching Filters</h3>
+            <p>Try clearing your search query or selecting a different career trade from the chips above.</p>
+          </div>
+        `;
+        return;
+      }
+
+      gridEl.innerHTML = filtered.map(v => {
+        const pct = Math.round(v.score * 100);
+        const watchUrl = `https://www.youtube.com/watch?v=${v.video_id}`;
+        return `
+          <article class="ks-yt-card">
+            <div class="ks-yt-thumb-box">
+              <img src="${v.thumbnail_url}" alt="${v.video_title}" loading="lazy">
+              <a href="${watchUrl}" target="_blank" rel="noopener noreferrer" class="ks-yt-play-badge" title="Watch on YouTube">▶</a>
+              <span class="ks-yt-cat-badge">${v.category_label}</span>
+            </div>
+            <div class="ks-yt-content">
+              <div class="ks-yt-meta-row">
+                <span class="ks-yt-channel">📺 ${v.channel_title}</span>
+                <span>🌐 ${v.language}</span>
+              </div>
+              <h2 class="ks-yt-title" title="${v.video_title}">${v.video_title}</h2>
+              <p class="ks-yt-desc">${v.description}</p>
+              
+              <div class="ks-yt-relevance-box">
+                <div class="ks-yt-meter-header">
+                  <span>Relevance Match</span>
+                  <span style="color: #16a34a;">${pct}%</span>
+                </div>
+                <div class="ks-yt-meter-bar">
+                  <div class="ks-yt-meter-fill" style="width: ${pct}%;"></div>
+                </div>
+                <p class="ks-yt-reason">${v.reason}</p>
+                <a href="${watchUrl}" target="_blank" rel="noopener noreferrer" class="ks-yt-watch-btn">
+                  Watch on YouTube ↗
+                </a>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    // Event Listeners
+    searchInput.addEventListener('input', (e) => {
+      currentSearchQuery = e.target.value;
+      renderCards();
+    });
+
+    langSelect.addEventListener('change', (e) => {
+      currentLanguageFilter = e.target.value;
+      renderCards();
+    });
+
+    tradeChips.addEventListener('click', (e) => {
+      const btn = e.target.closest('.ks-yt-chip');
+      if (btn) {
+        tradeChips.querySelectorAll('.ks-yt-chip').forEach(c => c.classList.remove('active'));
+        btn.classList.add('active');
+        currentTradeFilter = btn.getAttribute('data-trade');
+        renderCards();
+      }
+    });
+
+    categoryTabs.addEventListener('click', (e) => {
+      const btn = e.target.closest('.ks-yt-tab');
+      if (btn) {
+        categoryTabs.querySelectorAll('.ks-yt-tab').forEach(t => t.classList.remove('active'));
+        btn.classList.add('active');
+        currentCategoryFilter = btn.getAttribute('data-cat');
+        renderCards();
+      }
+    });
+
+    // Initial render
+    renderCards();
+  </script>
+</body>
+</html>

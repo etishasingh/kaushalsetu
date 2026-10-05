@@ -1,0 +1,178 @@
+{
+  "metadata": {
+    "generated_at": "2026-10-03T22:01:00Z",
+    "description": "Synthetic Demonstration Profiles for KaushalSetu AI Recommendation Engine Validation",
+    "disclaimer": "These profiles are synthetic test cases engineered to probe edge cases, constraint boundaries, and responsible AI disclosures. They DO NOT represent real individual learners or real user outcomes.",
+    "total_profiles": 8
+  },
+  "profiles": [
+    {
+      "id": "synthetic_01_welding_fabrication",
+      "test_scenario": "Welding and fabrication learner with 10th pass and 4 years experience",
+      "expected_behavior": "Should retrieve welding/fabricator qualifications (e.g. Stainless Steel Fabricator, Manual Metal Arc Welding). High text relevance and confirmed ELIGIBLE status on multi-clause pathways accepting 10th + 4 yrs.",
+      "payload": {
+        "interests": ["welding", "fabrication", "sheet metal"],
+        "preferred_activities": ["manual metal arc welding", "gas cutting"],
+        "existing_qualification": "10th",
+        "prior_experience_years": 4.0,
+        "current_district": "Kanpur Nagar",
+        "current_state": "Uttar Pradesh",
+        "willingness_to_relocate": "within_district",
+        "max_duration_hours": 800.0,
+        "max_budget_inr": null,
+        "language_preference": "English",
+        "exclude_unknown_eligibility": false,
+        "exclude_unknown_location": false,
+        "exclude_unknown_fees": false,
+        "top_k": 5
+      }
+    },
+    {
+      "id": "synthetic_02_cnc_machining",
+      "test_scenario": "CNC and precision machining learner with 10th pass and 2 years experience",
+      "expected_behavior": "Should retrieve CNC operator, machinist, turner, and tool room qualifications with high domain alignment.",
+      "payload": {
+        "interests": ["cnc operator", "lathe milling", "precision machining"],
+        "preferred_activities": ["operating cnc lathe", "machine tool programming"],
+        "existing_qualification": "10th",
+        "prior_experience_years": 2.0,
+        "current_district": "Pune",
+        "current_state": "Maharashtra",
+        "willingness_to_relocate": "nationally",
+        "max_duration_hours": 1500.0,
+        "max_budget_inr": null,
+        "language_preference": "English",
+        "exclude_unknown_eligibility": false,
+        "exclude_unknown_location": false,
+        "exclude_unknown_fees": false,
+        "top_k": 5
+      }
+    },
+    {
+      "id": "synthetic_03_electrical_work",
+      "test_scenario": "Electrical and instrumentation enthusiast with 10th pass and 1 year experience",
+      "expected_behavior": "Should retrieve instrumentation and electrical technician courses, evaluating admission criteria transparently.",
+      "payload": {
+        "interests": ["electrical installation", "wiring", "motor maintenance", "transformer"],
+        "preferred_activities": ["troubleshooting circuits", "appliance wiring"],
+        "existing_qualification": "10th",
+        "prior_experience_years": 1.0,
+        "current_district": "Bhubaneswar",
+        "current_state": "Odisha",
+        "willingness_to_relocate": "within_district",
+        "max_duration_hours": 1000.0,
+        "max_budget_inr": null,
+        "language_preference": "Hindi",
+        "exclude_unknown_eligibility": false,
+        "exclude_unknown_location": false,
+        "exclude_unknown_fees": false,
+        "top_k": 5
+      }
+    },
+    {
+      "id": "synthetic_04_incomplete_education",
+      "test_scenario": "Learner with missing/null educational qualification but with work experience",
+      "expected_behavior": "System must NEVER mark candidate as ELIGIBLE. Must evaluate all returned options as UNKNOWN with explicit notice that education is missing.",
+      "payload": {
+        "interests": ["automotive repair", "engine overhaul"],
+        "preferred_activities": ["mechanic helper", "oil filter replacement"],
+        "existing_qualification": null,
+        "prior_experience_years": 3.0,
+        "current_district": "Jaipur",
+        "current_state": "Rajasthan",
+        "willingness_to_relocate": "within_district",
+        "max_duration_hours": null,
+        "max_budget_inr": null,
+        "language_preference": "English",
+        "exclude_unknown_eligibility": false,
+        "exclude_unknown_location": false,
+        "exclude_unknown_fees": false,
+        "top_k": 5
+      }
+    },
+    {
+      "id": "synthetic_05_unknown_eligibility_req",
+      "test_scenario": "Learner exploring traditional craft qualifications with minimal schooling",
+      "expected_behavior": "Should retrieve PM Vishwakarma craft qualifications (Lohar/Blacksmith, Locksmith, Armourer). Preserves open-entry or N.A. criteria without inventing barriers.",
+      "payload": {
+        "interests": ["traditional metal crafts", "knife making", "blacksmithing"],
+        "preferred_activities": ["forging", "hand tools shaping"],
+        "existing_qualification": "8th",
+        "prior_experience_years": 0.0,
+        "current_district": "Varanasi",
+        "current_state": "Uttar Pradesh",
+        "willingness_to_relocate": "within_district",
+        "max_duration_hours": null,
+        "max_budget_inr": null,
+        "language_preference": "English",
+        "exclude_unknown_eligibility": false,
+        "exclude_unknown_location": false,
+        "exclude_unknown_fees": false,
+        "top_k": 5
+      }
+    },
+    {
+      "id": "synthetic_06_ineligible_schooling_conflict",
+      "test_scenario": "Learner with no formal schooling applying for advanced technical courses in strict mode",
+      "expected_behavior": "When candidate fails mandatory entry criteria (e.g. requires 10th or 12th) and exclude_unknown_eligibility is true, ineligible courses are pruned, returning 0 unverified claims.",
+      "payload": {
+        "interests": ["advanced automation", "plc programming", "instrumentation"],
+        "preferred_activities": ["scada control", "calibration"],
+        "existing_qualification": "none",
+        "prior_experience_years": 0.0,
+        "current_district": "Ahmedabad",
+        "current_state": "Gujarat",
+        "willingness_to_relocate": "within_district",
+        "max_duration_hours": 500.0,
+        "max_budget_inr": null,
+        "language_preference": "English",
+        "exclude_unknown_eligibility": true,
+        "exclude_unknown_location": false,
+        "exclude_unknown_fees": false,
+        "top_k": 5
+      }
+    },
+    {
+      "id": "synthetic_07_budget_duration_limits",
+      "test_scenario": "Learner with strict short duration (<=300h) and zero-fee budget (PMKVY free only)",
+      "expected_behavior": "Excludes all long courses (>300h) and all courses with known non-zero fees. Retains only short free/subsidized courses.",
+      "payload": {
+        "interests": ["welding", "sheet metal"],
+        "preferred_activities": ["arc cutting"],
+        "existing_qualification": "10th",
+        "prior_experience_years": 2.0,
+        "current_district": "Kanpur Nagar",
+        "current_state": "Uttar Pradesh",
+        "willingness_to_relocate": "within_district",
+        "max_duration_hours": 300.0,
+        "max_budget_inr": 0.0,
+        "language_preference": "English",
+        "exclude_unknown_eligibility": false,
+        "exclude_unknown_location": false,
+        "exclude_unknown_fees": false,
+        "top_k": 5
+      }
+    },
+    {
+      "id": "synthetic_08_out_of_domain_unmatched",
+      "test_scenario": "Completely out-of-domain query with zero vocational catalogue terms",
+      "expected_behavior": "System does NOT invent fake qualifications. Text relevance scores remain near zero (<=0.05). System returns honest limitations.",
+      "payload": {
+        "interests": ["quantum computing", "deep sea marine archaeology", "neurosurgery"],
+        "preferred_activities": ["particle acceleration", "submersible navigation"],
+        "existing_qualification": "Graduate",
+        "prior_experience_years": 1.0,
+        "current_district": "Bengaluru",
+        "current_state": "Karnataka",
+        "willingness_to_relocate": "nationally",
+        "max_duration_hours": 1000.0,
+        "max_budget_inr": null,
+        "language_preference": "English",
+        "exclude_unknown_eligibility": false,
+        "exclude_unknown_location": false,
+        "exclude_unknown_fees": false,
+        "top_k": 5
+      }
+    }
+  ]
+}

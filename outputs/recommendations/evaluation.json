@@ -1,0 +1,14 @@
+{
+  "mean_precision_at_3": 0.39999999999999997,
+  "mean_precision_at_5": 0.24,
+  "mean_recall_at_5": 0.3,
+  "mean_reciprocal_rank": 0.4333333333333333,
+  "catalogue_coverage_count": 25,
+  "catalogue_coverage_pct": 23.36,
+  "missingness_audit": {
+    "total_catalogue_records": 107,
+    "records_with_unlinked_providers": 99,
+    "pct_records_with_unlinked_providers": 92.52,
+    "handling_guarantee": "All 99 unlinked qualifications remain discoverable via NQR standards with transparent missingness disclosures"
+  }
+}

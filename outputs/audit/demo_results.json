@@ -1,0 +1,711 @@
+{
+  "execution_timestamp": "2026-10-03T22:02:00Z",
+  "api_endpoint_called": "http://127.0.0.1:8000/api/recommendations",
+  "total_profiles_tested": 8,
+  "successful_requests": 8,
+  "results": [
+    {
+      "profile_id": "synthetic_01_welding_fabrication",
+      "test_scenario": "Welding and fabrication learner with 10th pass and 4 years experience",
+      "expected_behavior": "Should retrieve welding/fabricator qualifications (e.g. Stainless Steel Fabricator, Manual Metal Arc Welding). High text relevance and confirmed ELIGIBLE status on multi-clause pathways accepting 10th + 4 yrs.",
+      "request_payload": {
+        "interests": [
+          "welding",
+          "fabrication",
+          "sheet metal"
+        ],
+        "preferred_activities": [
+          "manual metal arc welding",
+          "gas cutting"
+        ],
+        "existing_qualification": "10th",
+        "prior_experience_years": 4.0,
+        "current_district": "Kanpur Nagar",
+        "current_state": "Uttar Pradesh",
+        "willingness_to_relocate": "within_district",
+        "max_duration_hours": 800.0,
+        "max_budget_inr": null,
+        "language_preference": "English",
+        "exclude_unknown_eligibility": false,
+        "exclude_unknown_location": false,
+        "exclude_unknown_fees": false,
+        "top_k": 5
+      },
+      "http_status": 200,
+      "success": true,
+      "results_count": 5,
+      "eligibility_distribution": {
+        "ELIGIBLE": 5
+      },
+      "top_recommendations": [
+        {
+          "qualification_id": "QG-02-CG-03939-2025-V2-CGSSC",
+          "qualification_title": "Assistant Manual Metal Arc Welding/Shielded Metal Arc Welding Welder",
+          "nsqf_level": "Level 2",
+          "hybrid_score": 0.6045,
+          "eligibility_status": "ELIGIBLE",
+          "eligibility_reason": "Meets entry requirement via pathway: Ability to read and write | No Experience",
+          "has_provider_link": false,
+          "provider_name": "Unspecified / State-wide Centre Search Required"
+        },
+        {
+          "qualification_id": "2022/CCM/CGSC/06612",
+          "qualification_title": "Stainless Steel Fabricator",
+          "nsqf_level": "Level 5",
+          "hybrid_score": 0.6009,
+          "eligibility_status": "ELIGIBLE",
+          "eligibility_reason": "Meets entry requirement via pathway: 10th | Passed | 4 years",
+          "has_provider_link": true,
+          "provider_name": "Centum WorkSkills India Limited"
+        },
+        {
+          "qualification_id": "QG-03-CG-02860-2024-V1-WBSC",
+          "qualification_title": "Welder (Manual Metal Arc Welding and Gas Cutting)",
+          "nsqf_level": "Level 3",
+          "hybrid_score": 0.5793,
+          "eligibility_status": "ELIGIBLE",
+          "eligibility_reason": "Meets entry requirement via pathway: 10th | Passed | No Experience",
+          "has_provider_link": false,
+          "provider_name": "Unspecified / State-wide Centre Search Required"
+        },
+        {
+          "qualification_id": "QG-03-CG-03940-2025-V2-CGSSC",
+          "qualification_title": "Manual Metal Arc Welding/ Shielded Metal Arc Welding Welder",
+          "nsqf_level": "Level 3",
+          "hybrid_score": 0.5446,
+          "eligibility_status": "ELIGIBLE",
+          "eligibility_reason": "Meets entry requirement via pathway: 10th | Passed | No Experience | Equivalent",
+          "has_provider_link": false,
+          "provider_name": "Unspecified / State-wide Centre Search Required"
+        },
+        {
+          "qualification_id": "QG-04-CG-03944-2025-V2-CGSSC",
+          "qualification_title": "Senior Welder (Pipes & Plates)",
+          "nsqf_level": "Level 4",
+          "hybrid_score": 0.5293,
+          "eligibility_status": "ELIGIBLE",
+          "eligibility_reason": "Meets entry requirement via pathway: 10th | Passed | 3 years | Equivalent",
+          "has_provider_link": false,
+          "provider_name": "Unspecified / State-wide Centre Search Required"
+        }
+      ],
+      "error_detail": null,
+      "evaluation_verdict": "PASSED: HTTP 200 returned 5 ranked recommendations"
+    },
+    {
+      "profile_id": "synthetic_02_cnc_machining",
+      "test_scenario": "CNC and precision machining learner with 10th pass and 2 years experience",
+      "expected_behavior": "Should retrieve CNC operator, machinist, turner, and tool room qualifications with high domain alignment.",
+      "request_payload": {
+        "interests": [
+          "cnc operator",
+          "lathe milling",
+          "precision machining"
+        ],
+        "preferred_activities": [
+          "operating cnc lathe",
+          "machine tool programming"
+        ],
+        "existing_qualification": "10th",
+        "prior_experience_years": 2.0,
+        "current_district": "Pune",
+        "current_state": "Maharashtra",
+        "willingness_to_relocate": "nationally",
+        "max_duration_hours": 1500.0,
+        "max_budget_inr": null,
+        "language_preference": "English",
+        "exclude_unknown_eligibility": false,
+        "exclude_unknown_location": false,
+        "exclude_unknown_fees": false,
+        "top_k": 5
+      },
+      "http_status": 200,
+      "success": true,
+      "results_count": 5,
+      "eligibility_distribution": {
+        "ELIGIBLE": 5
+      },
+      "top_recommendations": [
+        {
+          "qualification_id": "QG-4.5-CG-03188-2024-V2-DGT",
+          "qualification_title": "MACHINIST & OPERATOR ADVANCE MACHINE TOOL",
+          "nsqf_level": "Level 4.5",
+          "hybrid_score": 0.5178,
+          "eligibility_status": "ELIGIBLE",
+          "eligibility_reason": "Meets entry requirement via pathway: 10th | ITI (2 Years) | No Experience | NTC/NAC",
+          "has_provider_link": false,
+          "provider_name": "Unspecified / State-wide Centre Search Required"
+        },
+        {
+          "qualification_id": "QG-4.5-CG-03224-2024-V2-DGT",
+          "qualification_title": "MECHANIC MACHINE TOOL MAINTENANCE",
+          "nsqf_level": "Level 4.5",
+          "hybrid_score": 0.4888,
+          "eligibility_status": "ELIGIBLE",
+          "eligibility_reason": "Meets entry requirement via pathway: 10th | ITI (After 10th) | No Experience | NTC/NAC",
+          "has_provider_link": false,
+          "provider_name": "Unspecified / State-wide Centre Search Required"
+        },
+        {
+          "qualification_id": "QG-4.5-CG-03193-2024-V2-DGT",
+          "qualification_title": "TURNER",
+          "nsqf_level": "Level 4.5",
+          "hybrid_score": 0.4888,
+          "eligibility_status": "ELIGIBLE",
+          "eligibility_reason": "Meets entry requirement via pathway: 10th | ITI (2 Years) | No Experience | NTC/NAC",
+          "has_provider_link": false,
+          "provider_name": "Unspecified / State-wide Centre Search Required"
+        },
+        {
+          "qualification_id": "NG-04-CG-02645-2024-V1-SCTEVTO",
+          "qualification_title": "Fundamental of CNC Lathe Programming",
+          "nsqf_level": "Level 4",
+          "hybrid_score": 0.4814,
+          "eligibility_status": "ELIGIBLE",
+          "eligibility_reason": "Meets entry requirement via pathway: 10th | No Experience | 2 year NTC",
+          "has_provider_link": false,
+          "provider_name": "Unspecified / State-wide Centre Search Required"
+        },
+        {
+          "qualification_id": "QG-4.5-CG-03182-2024-V2-DGT",
+          "qualification_title": "TOOL & DIE MAKER",
+          "nsqf_level": "Level 4.5",
+          "hybrid_score": 0.4744,
+          "eligibility_status": "ELIGIBLE",
+          "eligibility_reason": "Meets entry requirement via pathway: 10th | ITI (2 Years) | No Experience | NTC/NAC",
+          "has_provider_link": false,
+          "provider_name": "Unspecified / State-wide Centre Search Required"
+        }
+      ],
+      "error_detail": null,
+      "evaluation_verdict": "PASSED: HTTP 200 returned 5 ranked recommendations"
+    },
+    {
+      "profile_id": "synthetic_03_electrical_work",
+      "test_scenario": "Electrical and instrumentation enthusiast with 10th pass and 1 year experience",
+      "expected_behavior": "Should retrieve instrumentation and electrical technician courses, evaluating admission criteria transparently.",
+      "request_payload": {
+        "interests": [
+          "electrical installation",
+          "wiring",
+          "motor maintenance",
+          "transformer"
+        ],
+        "preferred_activities": [
+          "troubleshooting circuits",
+          "appliance wiring"
+        ],
+        "existing_qualification": "10th",
+        "prior_experience_years": 1.0,
+        "current_district": "Bhubaneswar",
+        "current_state": "Odisha",
+        "willingness_to_relocate": "within_district",
+        "max_duration_hours": 1000.0,
+        "max_budget_inr": null,
+        "language_preference": "Hindi",
+        "exclude_unknown_eligibility": false,
+        "exclude_unknown_location": false,
+        "exclude_unknown_fees": false,
+        "top_k": 5
+      },
+      "http_status": 200,
+      "success": true,
+      "results_count": 5,
+      "eligibility_distribution": {
+        "ELIGIBLE": 5
+      },
+      "top_recommendations": [
+        {
+          "qualification_id": "QG-4.5-CG-02409-2024-V1-MSME",
+          "qualification_title": "SR. TECHNICIAN -MACHINE MAINTENANCE AND AUTOMATION",
+          "nsqf_level": "Level 4.5",
+          "hybrid_score": 0.3803,
+          "eligibility_status": "ELIGIBLE",
+          "eligibility_reason": "Meets entry requirement via pathway: Ability to read and write | In relevant field | 1 year | ITI",
+          "has_provider_link": false,
+          "provider_name": "Unspecified / State-wide Centre Search Required"
+        },
+        {
+          "qualification_id": "QG-03-CG-03931-2025-V2-CGSSC",
+          "qualification_title": "Fitter - Electrical and Electronic Assembly",
+          "nsqf_level": "Level 3",
+          "hybrid_score": 0.3445,
+          "eligibility_status": "ELIGIBLE",
+          "eligibility_reason": "Meets entry requirement via pathway: 10th | Passed | No Experience | Equivalent",
+          "has_provider_link": false,
+          "provider_name": "Unspecified / State-wide Centre Search Required"
+        },
+        {
+          "qualification_id": "QG-03-CG-03933-2025-V2-CGSSC",
+          "qualification_title": "Fitter - Mechanical Assembly",
+          "nsqf_level": "Level 3",
+          "hybrid_score": 0.3126,
+          "eligibility_status": "ELIGIBLE",
+          "eligibility_reason": "Meets entry requirement via pathway: 10th | Passed | No Experience | Equivalent",
+          "has_provider_link": false,
+          "provider_name": "Unspecified / State-wide Centre Search Required"
+        },
+        {
+          "qualification_id": "QG-02-CG-03938-2025-V2-CGSSC",
+          "qualification_title": "Sheet Metal Worker - Hand Tools and Manually Operated Machines",
+          "nsqf_level": "Level 2",
+          "hybrid_score": 0.3092,
+          "eligibility_status": "ELIGIBLE",
+          "eligibility_reason": "Meets entry requirement via pathway: Ability to read and write | No Experience",
+          "has_provider_link": false,
+          "provider_name": "Unspecified / State-wide Centre Search Required"
+        },
+        {
+          "qualification_id": "NG-2.5-CG-00744-2023-V1-CGSC",
+          "qualification_title": "Hammer and Tool Kit Maker",
+          "nsqf_level": "Level 2.5",
+          "hybrid_score": 0.305,
+          "eligibility_status": "ELIGIBLE",
+          "eligibility_reason": "Meets entry requirement via pathway: N.A. | No Experience",
+          "has_provider_link": false,
+          "provider_name": "Unspecified / State-wide Centre Search Required"
+        }
+      ],
+      "error_detail": null,
+      "evaluation_verdict": "PASSED: HTTP 200 returned 5 ranked recommendations"
+    },
+    {
+      "profile_id": "synthetic_04_incomplete_education",
+      "test_scenario": "Learner with missing/null educational qualification but with work experience",
+      "expected_behavior": "System must NEVER mark candidate as ELIGIBLE. Must evaluate all returned options as UNKNOWN with explicit notice that education is missing.",
+      "request_payload": {
+        "interests": [
+          "automotive repair",
+          "engine overhaul"
+        ],
+        "preferred_activities": [
+          "mechanic helper",
+          "oil filter replacement"
+        ],
+        "existing_qualification": null,
+        "prior_experience_years": 3.0,
+        "current_district": "Jaipur",
+        "current_state": "Rajasthan",
+        "willingness_to_relocate": "within_district",
+        "max_duration_hours": null,
+        "max_budget_inr": null,
+        "language_preference": "English",
+        "exclude_unknown_eligibility": false,
+        "exclude_unknown_location": false,
+        "exclude_unknown_fees": false,
+        "top_k": 5
+      },
+      "http_status": 200,
+      "success": true,
+      "results_count": 5,
+      "eligibility_distribution": {
+        "UNKNOWN": 5
+      },
+      "top_recommendations": [
+        {
+          "qualification_id": "QG-4.5-CG-03189-2024-V2-DGT",
+          "qualification_title": "MECHANIC REFRIGERATION AND AIR CONDITIONING",
+          "nsqf_level": "Level 4.5",
+          "hybrid_score": 0.3233,
+          "eligibility_status": "UNKNOWN",
+          "eligibility_reason": "Learner educational background not provided; admission requirements cannot be validated.",
+          "has_provider_link": false,
+          "provider_name": "Unspecified / State-wide Centre Search Required"
+        },
+        {
+          "qualification_id": "QG-4.5-CG-03224-2024-V2-DGT",
+          "qualification_title": "MECHANIC MACHINE TOOL MAINTENANCE",
+          "nsqf_level": "Level 4.5",
+          "hybrid_score": 0.32,
+          "eligibility_status": "UNKNOWN",
+          "eligibility_reason": "Learner educational background not provided; admission requirements cannot be validated.",
+          "has_provider_link": false,
+          "provider_name": "Unspecified / State-wide Centre Search Required"
+        },
+        {
+          "qualification_id": "QG-04-CG-03210-2024-V2-DGT",
+          "qualification_title": "FOUNDRYMAN",
+          "nsqf_level": "Level 4",
+          "hybrid_score": 0.3083,
+          "eligibility_status": "UNKNOWN",
+          "eligibility_reason": "Learner educational background not provided; admission requirements cannot be validated.",
+          "has_provider_link": false,
+          "provider_name": "Unspecified / State-wide Centre Search Required"
+        },
+        {
+          "qualification_id": "QG-4.5-CG-03188-2024-V2-DGT",
+          "qualification_title": "MACHINIST & OPERATOR ADVANCE MACHINE TOOL",
+          "nsqf_level": "Level 4.5",
+          "hybrid_score": 0.2916,
+          "eligibility_status": "UNKNOWN",
+          "eligibility_reason": "Learner educational background not provided; admission requirements cannot be validated.",
+          "has_provider_link": false,
+          "provider_name": "Unspecified / State-wide Centre Search Required"
+        },
+        {
+          "qualification_id": "QG-4.5-CG-03206-2024-V2-DGT",
+          "qualification_title": "DRAUGHTSMAN MECHANICAL",
+          "nsqf_level": "Level 4.5",
+          "hybrid_score": 0.2914,
+          "eligibility_status": "UNKNOWN",
+          "eligibility_reason": "Learner educational background not provided; admission requirements cannot be validated.",
+          "has_provider_link": false,
+          "provider_name": "Unspecified / State-wide Centre Search Required"
+        }
+      ],
+      "error_detail": null,
+      "evaluation_verdict": "PASSED: Zero false ELIGIBLE claims; all evaluated as UNKNOWN"
+    },
+    {
+      "profile_id": "synthetic_05_unknown_eligibility_req",
+      "test_scenario": "Learner exploring traditional craft qualifications with minimal schooling",
+      "expected_behavior": "Should retrieve PM Vishwakarma craft qualifications (Lohar/Blacksmith, Locksmith, Armourer). Preserves open-entry or N.A. criteria without inventing barriers.",
+      "request_payload": {
+        "interests": [
+          "traditional metal crafts",
+          "knife making",
+          "blacksmithing"
+        ],
+        "preferred_activities": [
+          "forging",
+          "hand tools shaping"
+        ],
+        "existing_qualification": "8th",
+        "prior_experience_years": 0.0,
+        "current_district": "Varanasi",
+        "current_state": "Uttar Pradesh",
+        "willingness_to_relocate": "within_district",
+        "max_duration_hours": null,
+        "max_budget_inr": null,
+        "language_preference": "English",
+        "exclude_unknown_eligibility": false,
+        "exclude_unknown_location": false,
+        "exclude_unknown_fees": false,
+        "top_k": 5
+      },
+      "http_status": 200,
+      "success": true,
+      "results_count": 5,
+      "eligibility_distribution": {
+        "ELIGIBLE": 5
+      },
+      "top_recommendations": [
+        {
+          "qualification_id": "QG-02-CG-03938-2025-V2-CGSSC",
+          "qualification_title": "Sheet Metal Worker - Hand Tools and Manually Operated Machines",
+          "nsqf_level": "Level 2",
+          "hybrid_score": 0.4604,
+          "eligibility_status": "ELIGIBLE",
+          "eligibility_reason": "Meets entry requirement via pathway: Ability to read and write | No Experience",
+          "has_provider_link": false,
+          "provider_name": "Unspecified / State-wide Centre Search Required"
+        },
+        {
+          "qualification_id": "QG-02-CG-03939-2025-V2-CGSSC",
+          "qualification_title": "Assistant Manual Metal Arc Welding/Shielded Metal Arc Welding Welder",
+          "nsqf_level": "Level 2",
+          "hybrid_score": 0.3507,
+          "eligibility_status": "ELIGIBLE",
+          "eligibility_reason": "Meets entry requirement via pathway: Ability to read and write | No Experience",
+          "has_provider_link": false,
+          "provider_name": "Unspecified / State-wide Centre Search Required"
+        },
+        {
+          "qualification_id": "QG-03-CG-03932-2025-V2-CGSSC",
+          "qualification_title": "Fitter - Fabrication",
+          "nsqf_level": "Level 3",
+          "hybrid_score": 0.3473,
+          "eligibility_status": "ELIGIBLE",
+          "eligibility_reason": "Meets entry requirement via pathway: 8th | Passed | No Experience | 2 year NTC",
+          "has_provider_link": false,
+          "provider_name": "Unspecified / State-wide Centre Search Required"
+        },
+        {
+          "qualification_id": "NG-2.5-CG-00744-2023-V1-CGSC",
+          "qualification_title": "Hammer and Tool Kit Maker",
+          "nsqf_level": "Level 2.5",
+          "hybrid_score": 0.3373,
+          "eligibility_status": "ELIGIBLE",
+          "eligibility_reason": "Meets entry requirement via pathway: N.A. | No Experience",
+          "has_provider_link": false,
+          "provider_name": "Unspecified / State-wide Centre Search Required"
+        },
+        {
+          "qualification_id": "NG-2.5-CG-00746-2023-V1-CGSC",
+          "qualification_title": "Locksmith",
+          "nsqf_level": "Level 2.5",
+          "hybrid_score": 0.3235,
+          "eligibility_status": "ELIGIBLE",
+          "eligibility_reason": "Meets entry requirement via pathway: N.A. | No Experience",
+          "has_provider_link": false,
+          "provider_name": "Unspecified / State-wide Centre Search Required"
+        }
+      ],
+      "error_detail": null,
+      "evaluation_verdict": "PASSED: HTTP 200 returned 5 ranked recommendations"
+    },
+    {
+      "profile_id": "synthetic_06_ineligible_schooling_conflict",
+      "test_scenario": "Learner with no formal schooling applying for advanced technical courses in strict mode",
+      "expected_behavior": "When candidate fails mandatory entry criteria (e.g. requires 10th or 12th) and exclude_unknown_eligibility is true, ineligible courses are pruned, returning 0 unverified claims.",
+      "request_payload": {
+        "interests": [
+          "advanced automation",
+          "plc programming",
+          "instrumentation"
+        ],
+        "preferred_activities": [
+          "scada control",
+          "calibration"
+        ],
+        "existing_qualification": "none",
+        "prior_experience_years": 0.0,
+        "current_district": "Ahmedabad",
+        "current_state": "Gujarat",
+        "willingness_to_relocate": "within_district",
+        "max_duration_hours": 500.0,
+        "max_budget_inr": null,
+        "language_preference": "English",
+        "exclude_unknown_eligibility": true,
+        "exclude_unknown_location": false,
+        "exclude_unknown_fees": false,
+        "top_k": 5
+      },
+      "http_status": 200,
+      "success": true,
+      "results_count": 5,
+      "eligibility_distribution": {
+        "ELIGIBLE": 3,
+        "INELIGIBLE": 2
+      },
+      "top_recommendations": [
+        {
+          "qualification_id": "NG-03-CG-02339-2024-V1-CGSC",
+          "qualification_title": "Hammer and Toolkit Maker",
+          "nsqf_level": "Level 3",
+          "hybrid_score": 0.355,
+          "eligibility_status": "ELIGIBLE",
+          "eligibility_reason": "Meets entry requirement via pathway: No Formal Education | No Experience",
+          "has_provider_link": false,
+          "provider_name": "Unspecified / State-wide Centre Search Required"
+        },
+        {
+          "qualification_id": "NG-03-CG-02341-2024-V1-CGSC",
+          "qualification_title": "Locksmith",
+          "nsqf_level": "Level 3",
+          "hybrid_score": 0.3408,
+          "eligibility_status": "ELIGIBLE",
+          "eligibility_reason": "Meets entry requirement via pathway: No Formal Education | No Experience",
+          "has_provider_link": false,
+          "provider_name": "Unspecified / State-wide Centre Search Required"
+        },
+        {
+          "qualification_id": "NG-03-CG-02324-2024-V1-CGSC",
+          "qualification_title": "Blacksmith (Advance)",
+          "nsqf_level": "Level 3",
+          "hybrid_score": 0.3404,
+          "eligibility_status": "ELIGIBLE",
+          "eligibility_reason": "Meets entry requirement via pathway: No Formal Education | No Experience",
+          "has_provider_link": false,
+          "provider_name": "Unspecified / State-wide Centre Search Required"
+        },
+        {
+          "qualification_id": "2022/ETR/IASC/06498",
+          "qualification_title": "Junior Instrumentation Technician (Process Control)",
+          "nsqf_level": "Level 3",
+          "hybrid_score": 0.3337,
+          "eligibility_status": "INELIGIBLE",
+          "eligibility_reason": "Does not meet alternative criteria: [8th | Passed | No Experience | NTC/NAC -> requires 8th (learner has none)]; [8th | Passed | 1 year -> requires 8th (learner has none), requires 1.0 yrs exp (learner has 0.0)]",
+          "has_provider_link": true,
+          "provider_name": "Quess Corp Limited (Skill Training Division)"
+        },
+        {
+          "qualification_id": "QG-04-CG-03946-2025-V2-CGSSC",
+          "qualification_title": "Capital Equipment - Instrumentation Technician",
+          "nsqf_level": "Level 4",
+          "hybrid_score": 0.3168,
+          "eligibility_status": "INELIGIBLE",
+          "eligibility_reason": "Does not meet alternative criteria: [12th | Passed | No Experience | Equivalent -> requires 12th (learner has none)]; [2nd Year of 3 Year Diploma after 10th | Completed | No Experience | Equivalent -> requires 2nd Year of 3 Year Diploma after 10th (learner has none)]",
+          "has_provider_link": false,
+          "provider_name": "Unspecified / State-wide Centre Search Required"
+        }
+      ],
+      "error_detail": null,
+      "evaluation_verdict": "PASSED: HTTP 200 returned 5 ranked recommendations"
+    },
+    {
+      "profile_id": "synthetic_07_budget_duration_limits",
+      "test_scenario": "Learner with strict short duration (<=300h) and zero-fee budget (PMKVY free only)",
+      "expected_behavior": "Excludes all long courses (>300h) and all courses with known non-zero fees. Retains only short free/subsidized courses.",
+      "request_payload": {
+        "interests": [
+          "welding",
+          "sheet metal"
+        ],
+        "preferred_activities": [
+          "arc cutting"
+        ],
+        "existing_qualification": "10th",
+        "prior_experience_years": 2.0,
+        "current_district": "Kanpur Nagar",
+        "current_state": "Uttar Pradesh",
+        "willingness_to_relocate": "within_district",
+        "max_duration_hours": 300.0,
+        "max_budget_inr": 0.0,
+        "language_preference": "English",
+        "exclude_unknown_eligibility": false,
+        "exclude_unknown_location": false,
+        "exclude_unknown_fees": false,
+        "top_k": 5
+      },
+      "http_status": 200,
+      "success": true,
+      "results_count": 5,
+      "eligibility_distribution": {
+        "ELIGIBLE": 5
+      },
+      "top_recommendations": [
+        {
+          "qualification_id": "QG-02-CG-03939-2025-V2-CGSSC",
+          "qualification_title": "Assistant Manual Metal Arc Welding/Shielded Metal Arc Welding Welder",
+          "nsqf_level": "Level 2",
+          "hybrid_score": 0.6178,
+          "eligibility_status": "ELIGIBLE",
+          "eligibility_reason": "Meets entry requirement via pathway: Ability to read and write | No Experience",
+          "has_provider_link": false,
+          "provider_name": "Unspecified / State-wide Centre Search Required"
+        },
+        {
+          "qualification_id": "QG-02-CG-03938-2025-V2-CGSSC",
+          "qualification_title": "Sheet Metal Worker - Hand Tools and Manually Operated Machines",
+          "nsqf_level": "Level 2",
+          "hybrid_score": 0.4764,
+          "eligibility_status": "ELIGIBLE",
+          "eligibility_reason": "Meets entry requirement via pathway: Ability to read and write | No Experience",
+          "has_provider_link": false,
+          "provider_name": "Unspecified / State-wide Centre Search Required"
+        },
+        {
+          "qualification_id": "QG-02-CG-00180-2023-V1.1-CGSC",
+          "qualification_title": "Polisher Optional: Polisher - Manual",
+          "nsqf_level": "Level 2",
+          "hybrid_score": 0.3764,
+          "eligibility_status": "ELIGIBLE",
+          "eligibility_reason": "Meets entry requirement via pathway: Ability to read and write | No Experience",
+          "has_provider_link": true,
+          "provider_name": "Centum WorkSkills India Limited"
+        },
+        {
+          "qualification_id": "NG-2.5-CG-00744-2023-V1-CGSC",
+          "qualification_title": "Hammer and Tool Kit Maker",
+          "nsqf_level": "Level 2.5",
+          "hybrid_score": 0.305,
+          "eligibility_status": "ELIGIBLE",
+          "eligibility_reason": "Meets entry requirement via pathway: N.A. | No Experience",
+          "has_provider_link": false,
+          "provider_name": "Unspecified / State-wide Centre Search Required"
+        },
+        {
+          "qualification_id": "NG-03-CG-02339-2024-V1-CGSC",
+          "qualification_title": "Hammer and Toolkit Maker",
+          "nsqf_level": "Level 3",
+          "hybrid_score": 0.305,
+          "eligibility_status": "ELIGIBLE",
+          "eligibility_reason": "Meets entry requirement via pathway: No Formal Education | No Experience",
+          "has_provider_link": false,
+          "provider_name": "Unspecified / State-wide Centre Search Required"
+        }
+      ],
+      "error_detail": null,
+      "evaluation_verdict": "PASSED: Strict constraints returned 5 valid candidates"
+    },
+    {
+      "profile_id": "synthetic_08_out_of_domain_unmatched",
+      "test_scenario": "Completely out-of-domain query with zero vocational catalogue terms",
+      "expected_behavior": "System does NOT invent fake qualifications. Text relevance scores remain near zero (<=0.05). System returns honest limitations.",
+      "request_payload": {
+        "interests": [
+          "quantum computing",
+          "deep sea marine archaeology",
+          "neurosurgery"
+        ],
+        "preferred_activities": [
+          "particle acceleration",
+          "submersible navigation"
+        ],
+        "existing_qualification": "Graduate",
+        "prior_experience_years": 1.0,
+        "current_district": "Bengaluru",
+        "current_state": "Karnataka",
+        "willingness_to_relocate": "nationally",
+        "max_duration_hours": 1000.0,
+        "max_budget_inr": null,
+        "language_preference": "English",
+        "exclude_unknown_eligibility": false,
+        "exclude_unknown_location": false,
+        "exclude_unknown_fees": false,
+        "top_k": 5
+      },
+      "http_status": 200,
+      "success": true,
+      "results_count": 5,
+      "eligibility_distribution": {
+        "ELIGIBLE": 5
+      },
+      "top_recommendations": [
+        {
+          "qualification_id": "2022/CCM/CGSC/06612",
+          "qualification_title": "Stainless Steel Fabricator",
+          "nsqf_level": "Level 5",
+          "hybrid_score": 0.335,
+          "eligibility_status": "ELIGIBLE",
+          "eligibility_reason": "Meets entry requirement via pathway: 12th | Passed | 1 year | NTC/NAC",
+          "has_provider_link": true,
+          "provider_name": "Centum WorkSkills India Limited"
+        },
+        {
+          "qualification_id": "2022/ETR/IASC/06501",
+          "qualification_title": "Instrumentation Technician (Process Control)",
+          "nsqf_level": "Level 4",
+          "hybrid_score": 0.335,
+          "eligibility_status": "ELIGIBLE",
+          "eligibility_reason": "Meets entry requirement via pathway: 10th | Passed | No Experience | NTC/NAC",
+          "has_provider_link": true,
+          "provider_name": "Orion Edutech Private Limited"
+        },
+        {
+          "qualification_id": "2022/ETR/IASC/06497",
+          "qualification_title": "Instrumentation Technician (Control Valve)",
+          "nsqf_level": "Level 4",
+          "hybrid_score": 0.335,
+          "eligibility_status": "ELIGIBLE",
+          "eligibility_reason": "Meets entry requirement via pathway: 10th | Passed | No Experience | NTC/NAC",
+          "has_provider_link": true,
+          "provider_name": "Orion Edutech Private Limited"
+        },
+        {
+          "qualification_id": "2022/ETR/IASC/06498",
+          "qualification_title": "Junior Instrumentation Technician (Process Control)",
+          "nsqf_level": "Level 3",
+          "hybrid_score": 0.335,
+          "eligibility_status": "ELIGIBLE",
+          "eligibility_reason": "Meets entry requirement via pathway: 8th | Passed | No Experience | NTC/NAC",
+          "has_provider_link": true,
+          "provider_name": "Quess Corp Limited (Skill Training Division)"
+        },
+        {
+          "qualification_id": "QG-04-CG-02411-2024-V1-MSME",
+          "qualification_title": "TECHNICIAN -CNC MACHINING",
+          "nsqf_level": "Level 4",
+          "hybrid_score": 0.335,
+          "eligibility_status": "ELIGIBLE",
+          "eligibility_reason": "Meets entry requirement via pathway: 10th | Passed | No Experience | NTC/NAC/CITS",
+          "has_provider_link": true,
+          "provider_name": "AISECT Skill Development Academy"
+        }
+      ],
+      "error_detail": null,
+      "evaluation_verdict": "PASSED: HTTP 200 returned 5 ranked recommendations"
+    }
+  ]
+}

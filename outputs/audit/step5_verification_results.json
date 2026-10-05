@@ -1,0 +1,59 @@
+{
+  "1_health_status": {
+    "status": 200,
+    "data": {
+      "status": "healthy",
+      "api_version": "2.0.0",
+      "catalogue_loaded": true,
+      "total_qualifications": 107,
+      "vectorizer_loaded": true,
+      "dense_embeddings_loaded": true,
+      "linked_providers_count": 8,
+      "missingness_rate_pct": 92.52
+    }
+  },
+  "2_catalogue_browsing": {
+    "status": 200,
+    "total_count": 107,
+    "sample_title": "Stainless Steel Fabricator"
+  },
+  "3_valid_recommendation": {
+    "status": 200,
+    "top_match": "Assistant Manual Metal Arc Welding/Shielded Metal Arc Welding Welder",
+    "top_score": 0.703,
+    "eligibility": "ELIGIBLE"
+  },
+  "4_incomplete_profile": {
+    "status": 200,
+    "all_unknown": true,
+    "reason": "Learner educational background not provided; admission requirements cannot be validated."
+  },
+  "5_unknown_eligibility_case": {
+    "status": 200,
+    "returned_count": 5
+  },
+  "6_qualification_detail_lookup": {
+    "status": 200,
+    "qualification_id": "2022/CCM/CGSC/06612",
+    "title": "Stainless Steel Fabricator",
+    "nsqf": "Level 5",
+    "nqr_url": "https://nqr.gov.in/qualifications/3607"
+  },
+  "7_grounded_counsellor_question": {
+    "status": 200,
+    "intent": "eligibility_requirement",
+    "mode": "grounded_knowledge_base",
+    "answer_snippet": "[Mode: Grounded Knowledge-Base Counsellor (LLM API key not configured; response generated from verified NQR/SIDH records)]\n\n### Official Entry Requirements: Stainless Steel Fabricator (Level 5)\n\n- **O..."
+  },
+  "8_missing_dataset_question": {
+    "status": 200,
+    "verified_facts_present": false,
+    "answer_snippet": "[Mode: Grounded Knowledge-Base Counsellor (LLM API key not configured; response generated from verified NQR/SIDH records)]\n\n### Notice: Topic Not Present in Official Dataset\n\nThe subject you asked abo..."
+  },
+  "9_invalid_requests_and_errors": {
+    "404_nonexistent_id": 404,
+    "422_negative_experience": 422,
+    "422_page_zero": 422,
+    "422_empty_chat_message": 422
+  }
+}

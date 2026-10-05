@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KaushalSetu AI — Voice & Conversational Career Counsellor</title>
+  <style>
+    /* =========================================================================
+     * KaushalSetu Voice Chatbot Scoped Styles
+     * All styles are prefixed with .ks-voice- to prevent host style collisions.
+     * ========================================================================= */
+    :root {
+      --ks-voice-primary: #1e3a8a;
+      --ks-voice-primary-hover: #1d4ed8;
+      --ks-voice-accent: #3b82f6;
+      --ks-voice-accent-light: #eff6ff;
+      --ks-voice-bg: #f8fafc;
+      --ks-voice-surface: #ffffff;
+      --ks-voice-text: #0f172a;
+      --ks-voice-text-muted: #64748b;
+      --ks-voice-border: #e2e8f0;
+      --ks-voice-success: #16a34a;
+      --ks-voice-warning: #d97706;
+      --ks-voice-danger: #dc2626;
+      --ks-voice-radius: 14px;
+      --ks-voice-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+      --ks-voice-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    }
+
+    /* Standalone Container */
+    body.ks-voice-standalone-body {
+      margin: 0;
+      padding: 20px;
+      background-color: var(--ks-voice-bg);
+      font-family: var(--ks-voice-font);
+      color: var(--ks-voice-text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+
+    .ks-voice-wrapper {
+      width: 100%;
+      max-width: 520px;
+      height: 720px;
+      max-height: 92vh;
+      background: var(--ks-voice-surface);
+      border-radius: var(--ks-voice-radius);
+      box-shadow: var(--ks-voice-shadow);
+      border: 1px solid var(--ks-voice-border);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Header */
+    .ks-voice-header {
+      background: linear-gradient(135deg, var(--ks-voice-primary), #1e293b);
+      color: #ffffff;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .ks-voice-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .ks-voice-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 19px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .ks-voice-title h2 {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .ks-voice-title p {
+      margin: 2px 0 0 0;
+      font-size: 11px;
+      color: #cbd5e1;
+    }
+
+    .ks-voice-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ks-voice-select {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #ffffff;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 500;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .ks-voice-select option {
+      background: #1e293b;
+      color: #ffffff;
+    }
+
+    .ks-voice-mode-pill {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+    }
+
+    .ks-voice-mode-live {
+      background: rgba(22, 163, 74, 0.25);
+      color: #86efac;
+      border: 1px solid rgba(34, 197, 94, 0.4);
+    }
+
+    .ks-voice-mode-demo {
+      background: rgba(217, 119, 6, 0.25);
+      color: #fde68a;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+
+    /* Notification / Mode Banner */
+    .ks-voice-banner {
+      background: #f1f5f9;
+      border-bottom: 1px solid var(--ks-voice-border);
+      padding: 6px 14px;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--ks-voice-text-muted);
+    }
+
+    .ks-voice-banner strong {
+      color: var(--ks-voice-text);
+    }
+
+    .ks-voice-banner-btn {
+      background: none;
+      border: none;
+      color: var(--ks-voice-accent);
+      font-size: 11px;
+      cursor: pointer;
+      text-decoration: underline;
+      padding: 0;
+    }
+
+    /* Chat Messages Stream */
+    .ks-voice-messages {
+      flex: 1;
+      padding: 16px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      scroll-behavior: smooth;
+    }
+
+    .ks-voice-msg-row {
+      display: flex;
+      gap: 10px;
+      max-width: 88%;
+      animation: ksVoiceFadeIn 0.25s ease-out;
+    }
+
+    @keyframes ksVoiceFadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .ks-voice-msg-user {
+      align-self: flex-end;
+      flex-direction: row-reverse;
+    }
+
+    .ks-voice-msg-bot {
+      align-self: flex-start;
+    }
+
+    .ks-voice-msg-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    .ks-voice-msg-user .ks-voice-msg-avatar {
+      background: var(--ks-voice-accent);
+      color: #ffffff;
+    }
+
+    .ks-voice-bubble {
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 13px;
+      line-height: 1.45;
+      position: relative;
+    }
+
+    .ks-voice-msg-user .ks-voice-bubble {
+      background: var(--ks-voice-primary);
+      color: #ffffff;
+      border-bottom-right-radius: 2px;
+    }
+
+    .ks-voice-msg-bot .ks-voice-bubble {
+      background: #f1f5f9;
+      color: var(--ks-voice-text);
+      border-bottom-left-radius: 2px;
+      border: 1px solid var(--ks-voice-border);
+    }
+
+    .ks-voice-bubble p {
+      margin: 0 0 6px 0;
+    }
+
+    .ks-voice-bubble p:last-child {
+      margin-bottom: 0;
+    }
+
+    .ks-voice-bubble-meta {
+      font-size: 10px;
+      color: #94a3b8;
+      margin-top: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .ks-voice-msg-user .ks-voice-bubble-meta {
+      color: rgba(255, 255, 255, 0.7);
+      justify-content: flex-end;
+    }
+
+    /* Evidence Tags */
+    .ks-voice-evidence-box {
+      margin-top: 8px;
+      padding-top: 6px;
+      border-top: 1px dashed #cbd5e1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .ks-voice-evidence-tag {
+      background: #e0f2fe;
+      color: #0369a1;
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .ks-voice-links-box {
+      margin-top: 6px;
+      font-size: 11px;
+    }
+
+    .ks-voice-links-box a {
+      color: var(--ks-voice-accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .ks-voice-links-box a:hover {
+      text-decoration: underline;
+    }
+
+    .ks-voice-sources-box {
+      margin-top: 8px;
+      padding-top: 6px;
+      border-top: 1px dashed #cbd5e1;
+      font-size: 11px;
+      color: #334155;
+    }
+
+    .ks-voice-sources-box a {
+      color: var(--ks-voice-accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .ks-voice-sources-box a:hover {
+      text-decoration: underline;
+    }
+
+    .ks-voice-disclaimer-box {
+      margin-top: 6px;
+      font-size: 10px;
+      color: #94a3b8;
+      font-style: italic;
+    }
+
+    /* Notice cards for permissions, browser support, etc. */
+    .ks-voice-notice-row {
+      align-self: center;
+      max-width: 95%;
+      margin: 4px 0;
+      animation: ksVoiceFadeIn 0.25s ease-out;
+    }
+
+    .ks-voice-notice-box {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 11.5px;
+      color: #991b1b;
+      line-height: 1.4;
+    }
+
+    .ks-voice-notice-box strong {
+      display: block;
+      margin-bottom: 2px;
+      color: #7f1d1d;
+    }
+
+    .ks-voice-notice-box.ks-voice-notice-info {
+      background: #f0fdf4;
+      border-color: #bbf7d0;
+      color: #166534;
+    }
+
+    .ks-voice-notice-box.ks-voice-notice-info strong {
+      color: #14532d;
+    }
+
+    /* Speak Message Button inside Bubble */
+    .ks-voice-speak-btn {
+      background: none;
+      border: none;
+      color: var(--ks-voice-text-muted);
+      cursor: pointer;
+      font-size: 12px;
+      padding: 2px 4px;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      transition: color 0.15s;
+    }
+
+    .ks-voice-speak-btn:hover {
+      color: var(--ks-voice-primary);
+    }
+
+    .ks-voice-speak-btn.ks-voice-speaking {
+      color: var(--ks-voice-danger);
+      font-weight: 600;
+    }
+
+    /* Suggestion Chips */
+    .ks-voice-chips-container {
+      padding: 0 16px 8px 16px;
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      white-space: nowrap;
+      scrollbar-width: none;
+    }
+
+    .ks-voice-chips-container::-webkit-scrollbar {
+      display: none;
+    }
+
+    .ks-voice-chip {
+      background: #ffffff;
+      border: 1px solid var(--ks-voice-border);
+      color: #334155;
+      font-size: 11.5px;
+      padding: 5px 10px;
+      border-radius: 16px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s ease;
+      flex-shrink: 0;
+    }
+
+    .ks-voice-chip:hover {
+      background: var(--ks-voice-accent-light);
+      border-color: var(--ks-voice-accent);
+      color: var(--ks-voice-primary);
+    }
+
+    /* Listening / Speech Overlay & Visualizer */
+    .ks-voice-listening-panel {
+      background: #eff6ff;
+      border-top: 1px solid #bfdbfe;
+      padding: 10px 16px;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      animation: ksVoiceFadeIn 0.2s ease-out;
+    }
+
+    .ks-voice-listening-panel.ks-voice-active {
+      display: flex;
+    }
+
+    .ks-voice-wave-box {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      height: 20px;
+    }
+
+    .ks-voice-wave-bar {
+      width: 3px;
+      background: var(--ks-voice-accent);
+      border-radius: 2px;
+      animation: ksVoiceWave 1s ease-in-out infinite;
+    }
+
+    .ks-voice-wave-bar:nth-child(1) { height: 6px; animation-delay: 0.1s; }
+    .ks-voice-wave-bar:nth-child(2) { height: 14px; animation-delay: 0.2s; }
+    .ks-voice-wave-bar:nth-child(3) { height: 20px; animation-delay: 0.3s; }
+    .ks-voice-wave-bar:nth-child(4) { height: 12px; animation-delay: 0.4s; }
+    .ks-voice-wave-bar:nth-child(5) { height: 8px; animation-delay: 0.2s; }
+
+    @keyframes ksVoiceWave {
+      0%, 100% { transform: scaleY(0.4); }
+      50% { transform: scaleY(1.2); }
+    }
+
+    .ks-voice-transcript-preview {
+      font-size: 12px;
+      color: #1e3a8a;
+      font-style: italic;
+      flex: 1;
+      margin: 0 10px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .ks-voice-stop-speech-btn {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #fecaca;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    /* Controls & Input Form */
+    .ks-voice-footer {
+      background: var(--ks-voice-surface);
+      border-top: 1px solid var(--ks-voice-border);
+      padding: 10px 14px;
+    }
+
+    .ks-voice-input-form {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ks-voice-text-input {
+      flex: 1;
+      padding: 10px 14px;
+      border: 1px solid var(--ks-voice-border);
+      border-radius: 24px;
+      font-size: 13px;
+      outline: none;
+      font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .ks-voice-text-input:focus {
+      border-color: var(--ks-voice-accent);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    }
+
+    /* Big Animated Microphone Button */
+    .ks-voice-mic-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--ks-voice-accent);
+      color: #ffffff;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      cursor: pointer;
+      position: relative;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+      outline: none;
+    }
+
+    .ks-voice-mic-btn:hover {
+      background: var(--ks-voice-primary-hover);
+      transform: scale(1.04);
+    }
+
+    /* Pulsing Listening State */
+    .ks-voice-mic-btn.ks-voice-recording {
+      background: var(--ks-voice-danger);
+      animation: ksVoicePulse 1.2s infinite;
+    }
+
+    @keyframes ksVoicePulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.6);
+      }
+      70% {
+        box-shadow: 0 0 0 12px rgba(220, 38, 38, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(220, 38, 38, 0);
+      }
+    }
+
+    .ks-voice-send-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #f1f5f9;
+      color: #334155;
+      border: 1px solid var(--ks-voice-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+
+    .ks-voice-send-btn:hover {
+      background: var(--ks-voice-primary);
+      color: #ffffff;
+      border-color: var(--ks-voice-primary);
+    }
+
+    /* Disclaimer / Footer Note */
+    .ks-voice-disclaimer {
+      font-size: 10px;
+      color: #94a3b8;
+      text-align: center;
+      margin-top: 6px;
+      line-height: 1.3;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      body.ks-voice-standalone-body {
+        padding: 0;
+      }
+      .ks-voice-wrapper {
+        height: 100vh;
+        max-height: 100vh;
+        border-radius: 0;
+        border: none;
+      }
+    }
+  </style>
+</head>
+<body class="ks-voice-standalone-body">
+
+  <!-- =========================================================================
+   * Chatbot Interface Component
+   * ========================================================================= -->
+  <div class="ks-voice-wrapper" id="ksVoiceApp">
+    
+    <!-- Top Header -->
+    <header class="ks-voice-header">
+      <div class="ks-voice-brand">
+        <div class="ks-voice-avatar">🎙️</div>
+        <div class="ks-voice-title">
+          <h2>KaushalSetu Voice AI</h2>
+          <p>Vocational Guidance & Career Journeys</p>
+        </div>
+      </div>
+      <div class="ks-voice-header-actions">
+        <!-- Language Switcher -->
+        <select id="ksVoiceLangSelect" class="ks-voice-select" title="Select Guidance Language">
+          <option value="English">English</option>
+          <option value="Hindi">हिंदी (Hindi)</option>
+        </select>
+        <!-- Mode Indicator / Toggle -->
+        <span id="ksVoiceModeBadge" class="ks-voice-mode-pill ks-voice-mode-demo" title="Click to toggle between Live Backend and Standalone Demo">
+          Demo Mode
+        </span>
+      </div>
+    </header>
+
+    <!-- Notification Banner (Shows connection state & demo mode advice) -->
+    <div id="ksVoiceBanner" class="ks-voice-banner">
+      <span id="ksVoiceBannerText">Operating in <strong>Standalone Demo Mode</strong> (No backend required).</span>
+      <button id="ksVoiceBannerAction" class="ks-voice-banner-btn" type="button">Connect Backend</button>
+    </div>
+
+    <!-- Scrollable Chat Stream -->
+    <main class="ks-voice-messages" id="ksVoiceMessages">
+      <!-- Welcome Message -->
+      <div class="ks-voice-msg-row ks-voice-msg-bot">
+        <div class="ks-voice-msg-avatar">🤖</div>
+        <div class="ks-voice-bubble">
+          <p><strong>Namaste! Welcome to KaushalSetu Voice Assistant.</strong></p>
+          <p>You can speak or type in <strong>English</strong> or <strong>Hindi</strong>. Ask me about vocational trades, ITI eligibility, admission criteria, PMKVY fees, or real career journeys.</p>
+          <div class="ks-voice-bubble-meta">
+            <span>Verified Knowledge Base</span>
+            <span>•</span>
+            <button type="button" class="ks-voice-speak-btn" onclick="ksVoiceSpeakLastBotMessage(this)">🔊 Listen</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Quick Suggestion Chips -->
+    <div class="ks-voice-chips-container" id="ksVoiceChips">
+      <button type="button" class="ks-voice-chip" data-query="What are the entry prerequisites for Stainless Steel Fabricator?">Prerequisites for Fabricator</button>
+      <button type="button" class="ks-voice-chip" data-query="Compare Stainless Steel Fabricator vs CNC Milling Operator">Compare Fabricator vs CNC</button>
+      <button type="button" class="ks-voice-chip" data-query="Watch real career journey videos for Welder">Welder Journey Videos</button>
+      <button type="button" class="ks-voice-chip" data-query="Are PMKVY 4.0 training courses free?">PMKVY Fee Subsidies</button>
+    </div>
+
+    <!-- Active Listening Visualizer Bar -->
+    <div class="ks-voice-listening-panel" id="ksVoiceListeningPanel">
+      <div class="ks-voice-wave-box">
+        <div class="ks-voice-wave-bar"></div>
+        <div class="ks-voice-wave-bar"></div>
+        <div class="ks-voice-wave-bar"></div>
+        <div class="ks-voice-wave-bar"></div>
+        <div class="ks-voice-wave-bar"></div>
+      </div>
+      <div class="ks-voice-transcript-preview" id="ksVoiceTranscriptPreview">Listening to your voice... Speak now</div>
+      <button type="button" class="ks-voice-stop-speech-btn" id="ksVoiceStopMicBtn">Done</button>
+    </div>
+
+    <!-- Input Form & Microphone Controls -->
+    <footer class="ks-voice-footer">
+      <form class="ks-voice-input-form" id="ksVoiceInputForm" onsubmit="ksVoiceHandleSubmit(event)">
+        <!-- Microphone Button -->
+        <button type="button" id="ksVoiceMicBtn" class="ks-voice-mic-btn" title="Click to Speak (Speech-to-Text)">
+          🎤
+        </button>
+
+        <!-- Text Input -->
+        <input 
+          type="text" 
+          id="ksVoiceTextInput" 
+          class="ks-voice-text-input" 
+          placeholder="Ask a question or tap microphone..." 
+          autocomplete="off"
+          required
+        >
+
+        <!-- Send Button -->
+        <button type="submit" id="ksVoiceSendBtn" class="ks-voice-send-btn" title="Send Question">
+          ➤
+        </button>
+      </form>
+      <div class="ks-voice-disclaimer">
+        Grounding: NCVET National Qualifications Register. Personal video journeys reflect individual pathways.
+      </div>
+    </footer>
+  </div>
+
+  <!-- =========================================================================
+   * Embedded JavaScript Logic (Zero External Dependencies)
+   * ========================================================================= -->
+  <script>
+    /* =========================================================================
+     * KAUSHALSETU VOICE CHATBOT CONFIGURATION
+     * Edit these variables to connect to your existing backend.
+     * Supports URL query overrides: ?api=http://localhost:8000&mode=live&lang=Hindi
+     * ========================================================================= */
+    const urlParams = new URLSearchParams(window.location.search);
+
+    const KS_VOICE_CONFIG = {
+      // Base URL of KaushalSetu FastAPI backend
+      API_BASE_URL: (urlParams.get('api') || window.API_BASE_URL || (window.location.protocol === 'file:' ? 'http://127.0.0.1:8000' : '')).replace(/\/+$/, ''),
+      
+      // Endpoints (matched to backend/main.py)
+      CHAT_ENDPOINT: '/api/counsellor/chat',
+      HEALTH_ENDPOINT: '/health',
+      CAREER_VIDEOS_ENDPOINT: '/api/careers',
+      
+      // Operating Mode: 'auto' (checks backend on startup, falls back to demo), 'live', or 'demo'
+      MODE: urlParams.get('mode') || 'auto',
+      
+      // Attempt backend handshake automatically on load
+      AUTO_CONNECT_BACKEND: true,
+      
+      // Default Language: 'English' or 'Hindi'
+      DEFAULT_LANGUAGE: urlParams.get('lang') || 'English',
+      
+      // Speech Feature Flags
+      ENABLE_VOICE_INPUT: true,
+      ENABLE_VOICE_OUTPUT: true,
+      SPEECH_RATE: 1.0,
+      AUTO_SPEAK_BOT_RESPONSES: false
+    };
+
+    console.log('[KaushalSetu Voice] Initialized with config:', KS_VOICE_CONFIG);
+
+    // =========================================================================
+    // Standalone Demonstration Knowledge Base (Mode A)
+    // Real, un-hallucinated NCVET facts for offline testing (English & Hindi)
+    // =========================================================================
+    const KS_DEMO_KNOWLEDGE = {
+      "fabricator": {
+        title_en: "Stainless Steel Fabricator (NSQF Level 4)",
+        title_hi: "स्टेनलेस स्टील फैब्रिकेटर (NSQF लेवल 4)",
+        answer_en: "To become a **Stainless Steel Fabricator** (NCVET ID: `2022/CCM/CGSC/06612`), the standard admission requirement is **10th Class Passed** with 4 years of relevant work experience, OR **12th Class Passed** with 1 year experience, OR an **ITI / NTC Certificate** in Welder/Fabrication trade. Practical training covers TIG welding, sheet metal shearing, bending, and machine shop safety.",
+        answer_hi: "**स्टेनलेस स्टील फैब्रिकेटर** (NCVET ID: `2022/CCM/CGSC/06612`) बनने के लिए मानक प्रवेश आवश्यकता **10वीं कक्षा उत्तीर्ण + 4 वर्ष अनुभव**, या **12वीं कक्षा उत्तीर्ण + 1 वर्ष अनुभव**, या वेल्डर/शीट मेटल फैब्रिकेशन में **ITI / NTC प्रमाणपत्र** है। व्यावहारिक प्रशिक्षण में TIG वेल्डिंग, शीट मेटल शियरिंग, बेंडिंग और मशीन शॉप सुरक्षा शामिल है।",
+        evidence_en: ["NCVET Code: 2022/CCM/CGSC/06612", "Curriculum Duration: 600 Hours", "Capital Goods & Manufacturing"],
+        evidence_hi: ["NCVET कोड: 2022/CCM/CGSC/06612", "पाठ्यक्रम अवधि: 600 घंटे", "कैपिटल गुड्स और मैन्युफैक्चरिंग"],
+        source: "https://nqr.gov.in/qualifications/3607",
+        videos: [
+          { title: "Sheet Metal Fabrication & Stainless Steel Welding — Career Journey", channel: "Skill India Vocational Hub", url: "https://www.youtube.com/watch?v=P3WvU1uM9jM" },
+          { title: "Stainless Steel Fabrication for Beginners — Tools & Safety", channel: "ITI Masterclass", url: "https://www.youtube.com/watch?v=m1sQvY8nF3A" }
+        ]
+      },
+      "welder": {
+        title_en: "Manual Metal Arc Welding / Shielded Metal Arc Welder (NSQF Level 3/4)",
+        title_hi: "मैनुअल मेटल आर्क वेल्डर / SMAW वेल्डर (NSQF लेवल 3/4)",
+        answer_en: "A **Welder** (SMAW/MMAW) operates arc welding transformers to join mild and stainless steel plates. Entry requirements typically allow **8th or 10th Pass** learners to enroll in an ITI 1-year trade. Under PMKVY 4.0 and Apprentice Act programs, candidates receive hands-on shop training followed by factory apprenticeships.",
+        answer_hi: "**वेल्डर (SMAW/MMAW)** माइल्ड और स्टेनलेस स्टील प्लेट्स को जोड़ने के लिए आर्क वेल्डिंग का संचालन करते हैं। प्रवेश आवश्यकता आमतौर पर **8वीं या 10वीं पास** है, जिससे छात्र 1 वर्षीय ITI ट्रेड में प्रवेश ले सकते हैं। PMKVY 4.0 और शिक्षुता अधिनियम (Apprentice Act 1961) के तहत व्यावहारिक प्रशिक्षण और फैक्टरी अप्रेंटिसशिप मिलती है।",
+        evidence_en: ["DGT Trade: Welder (SMAW/GMAW)", "Apprentice Act 1961 Eligible", "Duration: 400 - 600 Hours"],
+        evidence_hi: ["DGT ट्रेड: वेल्डर", "शिक्षुता अधिनियम 1961 पात्र", "अवधि: 400 - 600 घंटे"],
+        source: "https://nqr.gov.in",
+        videos: [
+          { title: "Shielded Metal Arc Welding — Beginner to Professional Welder Journey", channel: "Indian Welding Society Hub", url: "https://www.youtube.com/watch?v=w8Km3Pz5RtY" }
+        ]
+      },
+      "cnc": {
+        title_en: "CNC Milling / Turning Operator (NSQF Level 4)",
+        title_hi: "सीएनसी मिलिंग / टर्निंग ऑपरेटर (NSQF लेवल 4)",
+        answer_en: "A **CNC Operator** inputs coordinate G-codes/M-codes, performs tooling setup, sets work offsets, and operates automated computer-numeric-control milling or turning centres. Required qualification is typically **10th + ITI Machinist** or **Polytechnic Diploma in Mechanical Engineering**.",
+        answer_hi: "**सीएनसी ऑपरेटर (CNC Milling / Turning Operator)** कंप्यूटर नियंत्रित मिलिंग या टर्निंग मशीनों पर टूलिंग और जॉब सेटअप करते हैं। आवश्यक योग्यता आमतौर पर **10वीं + ITI मशीनिस्ट** या **मैकेनिकल इंजीनियरिंग में पॉलिटेक्निक डिप्लोमा** है।",
+        evidence_en: ["Sector: Capital Goods", "Tolerance standard: 0.02 mm", "High Industry Demand"],
+        evidence_hi: ["सेक्टर: कैपिटल गुड्स", "सटीकता सहनशीलता: 0.02 मिमी", "उद्योग में उच्च मांग"],
+        source: "https://nqr.gov.in",
+        videos: [
+          { title: "CNC Machine Operator Career Scope and Apprenticeship", channel: "Indian Technical Careers", url: "https://www.youtube.com/watch?v=q9Wz4Nt2LpK" }
+        ]
+      },
+      "subsidies": {
+        title_en: "Government Training Fee Subsidies (PMKVY 4.0 / DGT)",
+        title_hi: "सरकारी प्रशिक्षण शुल्क सब्सिडी (PMKVY 4.0 / DGT)",
+        answer_en: "Under the **Pradhan Mantri Kaushal Vikas Yojana (PMKVY 4.0)**, accredited short-term vocational training is **100% government-funded** for eligible candidates with zero course fee. However, accommodation or boarding may be self-funded depending on the District PMKK centre.",
+        answer_hi: "**प्रधानमंत्री कौशल विकास योजना (PMKVY 4.0)** के अंतर्गत, पात्र उम्मीदवारों के लिए मान्यता प्राप्त अल्पकालिक वोकेशनल प्रशिक्षण **100% सरकारी वित्त पोषित (शून्य कोर्स फीस)** है। जिला PMKK केंद्र के आधार पर आवास या भोजन का खर्च अलग हो सकता है।",
+        evidence_en: ["PMKVY 4.0 Fee Subsidy", "Direct Benefit Transfer (DBT)", "Skill India Digital Hub Verification Required"],
+        evidence_hi: ["PMKVY 4.0 शुल्क सब्सिडी", "प्रत्यक्ष लाभ अंतरण (DBT)", "स्किल इंडिया डिजिटल सत्यापन आवश्यक"],
+        source: "https://www.skillindiadigital.gov.in",
+        videos: []
+      }
+    };
+
+    // =========================================================================
+    // DOM Elements
+    // =========================================================================
+    const ksMsgContainer = document.getElementById('ksVoiceMessages');
+    const ksInputForm = document.getElementById('ksVoiceInputForm');
+    const ksTextInput = document.getElementById('ksVoiceTextInput');
+    const ksMicBtn = document.getElementById('ksVoiceMicBtn');
+    const ksSendBtn = document.getElementById('ksVoiceSendBtn');
+    const ksLangSelect = document.getElementById('ksVoiceLangSelect');
+    const ksModeBadge = document.getElementById('ksVoiceModeBadge');
+    const ksBanner = document.getElementById('ksVoiceBanner');
+    const ksBannerText = document.getElementById('ksVoiceBannerText');
+    const ksBannerAction = document.getElementById('ksVoiceBannerAction');
+    const ksListeningPanel = document.getElementById('ksVoiceListeningPanel');
+    const ksTranscriptPreview = document.getElementById('ksVoiceTranscriptPreview');
+    const ksStopMicBtn = document.getElementById('ksVoiceStopMicBtn');
+    const ksChips = document.getElementById('ksVoiceChips');
+
+    // State Variables
+    let ksIsRecording = false;
+    let ksRecognition = null;
+    let ksSpeechSynthesis = window.speechSynthesis || null;
+    let ksCurrentUtterance = null;
+    let ksCurrentMode = 'demo'; // 'live' or 'demo'
+    let ksActiveLanguage = KS_VOICE_CONFIG.DEFAULT_LANGUAGE;
+
+    // Set initial select value
+    if (ksLangSelect) {
+      ksLangSelect.value = ksActiveLanguage;
+      ksLangSelect.addEventListener('change', (e) => {
+        ksActiveLanguage = e.target.value;
+        console.log('[KaushalSetu Voice] Language changed to:', ksActiveLanguage);
+      });
+    }
+
+    // =========================================================================
+    // Notice Banner & Status Appender
+    // =========================================================================
+    function ksAppendNotice(title, message, isInfo = false) {
+      const row = document.createElement('div');
+      row.className = 'ks-voice-notice-row';
+      const box = document.createElement('div');
+      box.className = `ks-voice-notice-box ${isInfo ? 'ks-voice-notice-info' : ''}`;
+      box.innerHTML = `<strong>${title}</strong><span>${message}</span>`;
+      row.appendChild(box);
+      ksMsgContainer.appendChild(row);
+      ksMsgContainer.scrollTop = ksMsgContainer.scrollHeight;
+    }
+
+    // =========================================================================
+    // Speech Recognition (STT) Integration
+    // =========================================================================
+    function ksInitSpeechRecognition() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        console.warn('[KaushalSetu Voice] Web Speech Recognition is not supported in this browser.');
+        return null;
+      }
+
+      const reco = new SpeechRecognition();
+      reco.continuous = false;
+      reco.interimResults = true;
+
+      reco.onstart = () => {
+        ksIsRecording = true;
+        ksMicBtn.classList.add('ks-voice-recording');
+        ksListeningPanel.classList.add('ks-voice-active');
+        ksTranscriptPreview.textContent = ksActiveLanguage === 'Hindi' ? 'सुन रहा हूँ... बोलिए' : 'Listening... Speak now';
+      };
+
+      reco.onresult = (event) => {
+        let interimText = '';
+        let finalText = '';
+
+        for (let i = event.resultIndex; i < event.results.length; ++i) {
+          if (event.results[i].isFinal) {
+            finalText += event.results[i][0].transcript;
+          } else {
+            interimText += event.results[i][0].transcript;
+          }
+        }
+
+        const currentText = finalText || interimText;
+        if (currentText) {
+          ksTranscriptPreview.textContent = currentText;
+          ksTextInput.value = currentText;
+        }
+      };
+
+      reco.onerror = (event) => {
+        console.warn('[KaushalSetu Voice] Speech recognition error:', event.error);
+        ksStopRecording();
+        if (event.error === 'not-allowed') {
+          ksAppendNotice(
+            '⚠️ Microphone Access Blocked',
+            'Microphone access was denied by your browser. Please click the lock or site settings icon in your browser URL bar and allow microphone permissions to use voice input.'
+          );
+        } else if (event.error === 'no-speech') {
+          ksTranscriptPreview.textContent = ksActiveLanguage === 'Hindi' ? 'कोई आवाज़ नहीं मिली। पुनः प्रयास करें।' : 'No voice detected. Please speak again.';
+        }
+      };
+
+      reco.onend = () => {
+        ksStopRecording();
+        // If text was captured, automatically trigger submission after brief pause
+        if (ksTextInput.value.trim().length > 1) {
+          setTimeout(() => {
+            ksInputForm.dispatchEvent(new Event('submit'));
+          }, 300);
+        }
+      };
+
+      return reco;
+    }
+
+    function ksStartRecording() {
+      if (!ksRecognition) {
+        ksRecognition = ksInitSpeechRecognition();
+      }
+
+      if (!ksRecognition) {
+        ksAppendNotice(
+          'ℹ️ Voice Recognition Unavailable',
+          'Web Speech Recognition is not supported by this browser engine or requires HTTPS / localhost. You can type queries in English or Hindi below, or open this file in Google Chrome / Microsoft Edge.'
+        );
+        return;
+      }
+
+      // Configure language dialect
+      ksRecognition.lang = ksActiveLanguage === 'Hindi' ? 'hi-IN' : 'en-IN';
+
+      try {
+        // Stop any active speech synthesis before listening
+        ksStopSpeaking();
+        ksRecognition.start();
+      } catch (err) {
+        console.warn('[KaushalSetu Voice] Could not start speech recognition:', err);
+      }
+    }
+
+    function ksStopRecording() {
+      ksIsRecording = false;
+      ksMicBtn.classList.remove('ks-voice-recording');
+      ksListeningPanel.classList.remove('ks-voice-active');
+      if (ksRecognition) {
+        try { ksRecognition.stop(); } catch(e) {}
+      }
+    }
+
+    if (ksMicBtn) {
+      ksMicBtn.addEventListener('click', () => {
+        if (ksIsRecording) {
+          ksStopRecording();
+        } else {
+          ksStartRecording();
+        }
+      });
+    }
+
+    if (ksStopMicBtn) {
+      ksStopMicBtn.addEventListener('click', ksStopRecording);
+    }
+
+    // =========================================================================
+    // Speech Synthesis (TTS) Integration
+    // =========================================================================
+    let ksActiveSpeakingBtn = null;
+
+    function ksCleanTextForSpeech(text) {
+      if (!text) return '';
+      let clean = text.replace(/\[\d+\]/g, '');
+      clean = clean.replace(/\[(.*?)\]\((.*?)\)/g, '$1');
+      clean = clean.replace(/[*_#`~>]/g, ' ');
+      clean = clean.replace(/https?:\/\/\S+/g, '');
+      clean = clean.replace(/NCVET ID:[^.]+\./g, '');
+      clean = clean.replace(/\s+/g, ' ').trim();
+      return clean;
+    }
+
+    function ksResetSpeakingButton() {
+      if (ksActiveSpeakingBtn) {
+        ksActiveSpeakingBtn.classList.remove('ks-voice-speaking');
+        ksActiveSpeakingBtn.innerHTML = '🔊 Listen';
+        ksActiveSpeakingBtn = null;
+      }
+    }
+
+    function ksSpeakText(text, lang, triggerBtn = null) {
+      if (!ksSpeechSynthesis || !KS_VOICE_CONFIG.ENABLE_VOICE_OUTPUT) return;
+
+      ksStopSpeaking();
+
+      const cleanText = ksCleanTextForSpeech(text);
+      if (!cleanText) return;
+
+      ksCurrentUtterance = new SpeechSynthesisUtterance(cleanText);
+      ksCurrentUtterance.rate = KS_VOICE_CONFIG.SPEECH_RATE || 1.0;
+      ksCurrentUtterance.lang = lang === 'Hindi' ? 'hi-IN' : 'en-IN';
+
+      if (triggerBtn) {
+        ksActiveSpeakingBtn = triggerBtn;
+        triggerBtn.classList.add('ks-voice-speaking');
+        triggerBtn.innerHTML = '⏹️ Stop';
+      }
+
+      // Pick best voice if available
+      const voices = ksSpeechSynthesis.getVoices();
+      if (voices && voices.length > 0) {
+        const langCode = lang === 'Hindi' ? 'hi' : 'en';
+        const matchedVoice = voices.find(v => v.lang.startsWith(langCode));
+        if (matchedVoice) ksCurrentUtterance.voice = matchedVoice;
+      }
+
+      ksCurrentUtterance.onend = () => {
+        ksResetSpeakingButton();
+        ksCurrentUtterance = null;
+      };
+
+      ksCurrentUtterance.onerror = () => {
+        ksResetSpeakingButton();
+        ksCurrentUtterance = null;
+      };
+
+      ksSpeechSynthesis.speak(ksCurrentUtterance);
+    }
+
+    function ksStopSpeaking() {
+      if (ksSpeechSynthesis && ksSpeechSynthesis.speaking) {
+        ksSpeechSynthesis.cancel();
+      }
+      ksResetSpeakingButton();
+      ksCurrentUtterance = null;
+    }
+
+    window.ksVoiceSpeakLastBotMessage = function(btn) {
+      if (ksSpeechSynthesis && ksSpeechSynthesis.speaking && ksActiveSpeakingBtn === btn) {
+        ksStopSpeaking();
+        return;
+      }
+      const bubble = btn.closest('.ks-voice-bubble');
+      if (bubble) {
+        const pTags = bubble.querySelectorAll('p');
+        let fullText = '';
+        pTags.forEach(p => fullText += ' ' + p.innerText);
+        ksSpeakText(fullText, ksActiveLanguage, btn);
+      }
+    };
+
+    // =========================================================================
+    // Mode Switching: Standalone Demo vs Live Backend
+    // =========================================================================
+    async function ksCheckBackendConnection() {
+      try {
+        const res = await fetch(`${KS_VOICE_CONFIG.API_BASE_URL}${KS_VOICE_CONFIG.HEALTH_ENDPOINT}`, { method: 'GET' });
+        if (res.ok) {
+          const data = await res.json();
+          ksSetMode('live', `Connected to Backend API (${data.total_qualifications} Careers Live)`);
+          return true;
+        }
+      } catch (err) {
+        console.warn('[KaushalSetu Voice] Backend unreachable. Falling back to Demo Mode.');
+      }
+      ksSetMode('demo', 'Backend Offline — Operating in Standalone Demonstration Mode');
+      return false;
+    }
+
+    function ksSetMode(mode, statusText) {
+      ksCurrentMode = mode;
+      if (mode === 'live') {
+        ksModeBadge.textContent = 'Live AI Backend';
+        ksModeBadge.className = 'ks-voice-mode-pill ks-voice-mode-live';
+        ksBannerText.innerHTML = `Connected to <strong>${KS_VOICE_CONFIG.API_BASE_URL || window.location.origin}</strong>`;
+        ksBannerAction.textContent = 'Switch to Demo';
+      } else {
+        ksModeBadge.textContent = 'Demo Mode';
+        ksModeBadge.className = 'ks-voice-mode-pill ks-voice-mode-demo';
+        ksBannerText.innerHTML = `Operating in <strong>Standalone Demo Mode</strong>`;
+        ksBannerAction.textContent = 'Connect Backend';
+      }
+      if (statusText) console.log(`[KaushalSetu Voice] ${statusText}`);
+    }
+
+    if (ksBannerAction) {
+      ksBannerAction.addEventListener('click', () => {
+        if (ksCurrentMode === 'live') {
+          ksSetMode('demo', 'Switched manually to Demo Mode.');
+        } else {
+          ksCheckBackendConnection();
+        }
+      });
+    }
+
+    if (ksModeBadge) {
+      ksModeBadge.addEventListener('click', () => {
+        if (ksCurrentMode === 'live') {
+          ksSetMode('demo');
+        } else {
+          ksCheckBackendConnection();
+        }
+      });
+    }
+
+    // =========================================================================
+    // Message Rendering & Markdown Parsing
+    // =========================================================================
+    function ksFormatMarkdown(text) {
+      if (!text) return '';
+      let html = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      // Bold
+      html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      // Inline code
+      html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+      // Linebreaks into paragraphs
+      const paragraphs = html.split('\n\n').filter(p => p.trim().length > 0);
+      return paragraphs.map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
+    }
+
+    function ksAppendMessage(role, text, meta = {}) {
+      const row = document.createElement('div');
+      row.className = `ks-voice-msg-row ${role === 'user' ? 'ks-voice-msg-user' : 'ks-voice-msg-bot'}`;
+
+      const avatar = document.createElement('div');
+      avatar.className = 'ks-voice-msg-avatar';
+      avatar.textContent = role === 'user' ? '👤' : '🤖';
+
+      const bubble = document.createElement('div');
+      bubble.className = 'ks-voice-bubble';
+
+      if (role === 'user') {
+        bubble.innerHTML = `<p>${text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>`;
+      } else {
+        bubble.innerHTML = ksFormatMarkdown(text);
+
+        // Add Evidence tags if present
+        if (meta.evidence && meta.evidence.length > 0) {
+          const evBox = document.createElement('div');
+          evBox.className = 'ks-voice-evidence-box';
+          meta.evidence.forEach(item => {
+            const tag = document.createElement('span');
+            tag.className = 'ks-voice-evidence-tag';
+            tag.textContent = `📌 ${item}`;
+            evBox.appendChild(tag);
+          });
+          bubble.appendChild(evBox);
+        }
+
+        // Add Official Sources if present
+        if (meta.sources && meta.sources.length > 0) {
+          const sourcesBox = document.createElement('div');
+          sourcesBox.className = 'ks-voice-sources-box';
+          sourcesBox.innerHTML = `<strong>🏛️ Official Qualifications Sources:</strong><br>` + 
+            meta.sources.map(s => {
+              if (s.startsWith('http')) {
+                return `• <a href="${s}" target="_blank" rel="noopener noreferrer">${s} ↗</a>`;
+              }
+              return `• <span>${s}</span>`;
+            }).join('<br>');
+          bubble.appendChild(sourcesBox);
+        }
+
+        // Add Video Links if present
+        if (meta.videos && meta.videos.length > 0) {
+          const linksBox = document.createElement('div');
+          linksBox.className = 'ks-voice-links-box';
+          linksBox.innerHTML = `<strong>🎬 Authentic Career Journey Videos:</strong><br>` + 
+            meta.videos.map(v => {
+              const url = v.url || v.video_url;
+              const title = v.title || v.video_title;
+              const ch = v.channel || v.channel_title;
+              return `• <a href="${url}" target="_blank" rel="noopener noreferrer">${title} ↗</a> (${ch})`;
+            }).join('<br>');
+          bubble.appendChild(linksBox);
+        }
+
+        // Add Disclaimers if present
+        if (meta.disclaimers && meta.disclaimers.length > 0) {
+          const discBox = document.createElement('div');
+          discBox.className = 'ks-voice-disclaimer-box';
+          discBox.innerHTML = meta.disclaimers.map(d => `* ${d}`).join('<br>');
+          bubble.appendChild(discBox);
+        }
+
+        // Add Meta Row
+        const metaRow = document.createElement('div');
+        metaRow.className = 'ks-voice-bubble-meta';
+        const modeLabel = meta.mode === 'live' ? 'Live AI Grounded' : 'Demo Knowledge Base';
+        metaRow.innerHTML = `
+          <span>${modeLabel}</span>
+          <span>•</span>
+          <button type="button" class="ks-voice-speak-btn" onclick="ksVoiceSpeakLastBotMessage(this)">🔊 Listen</button>
+        `;
+        bubble.appendChild(metaRow);
+      }
+
+      row.appendChild(avatar);
+      row.appendChild(bubble);
+      ksMsgContainer.appendChild(row);
+      ksMsgContainer.scrollTop = ksMsgContainer.scrollHeight;
+
+      // Optional auto-speak for bot responses
+      if (role === 'bot' && KS_VOICE_CONFIG.AUTO_SPEAK_BOT_RESPONSES) {
+        ksSpeakText(text, ksActiveLanguage);
+      }
+    }
+
+    // =========================================================================
+    // Response Resolution: Demo Mode (Mode A) vs Live Backend (Mode B)
+    // =========================================================================
+    async function ksGetDemoResponse(query) {
+      const q = query.toLowerCase();
+      const isHindi = (ksActiveLanguage === 'Hindi');
+      
+      if (q.includes('fabricator') || q.includes('stainless steel') || q.includes('sheet metal') || q.includes('फैब्रिकेटर')) {
+        const item = KS_DEMO_KNOWLEDGE.fabricator;
+        return {
+          answer: isHindi ? item.answer_hi : item.answer_en,
+          evidence: isHindi ? item.evidence_hi : item.evidence_en,
+          videos: item.videos,
+          mode: 'demo'
+        };
+      }
+      
+      if (q.includes('welder') || q.includes('welding') || q.includes('arc weld') || q.includes('वेल्डर')) {
+        const item = KS_DEMO_KNOWLEDGE.welder;
+        return {
+          answer: isHindi ? item.answer_hi : item.answer_en,
+          evidence: isHindi ? item.evidence_hi : item.evidence_en,
+          videos: item.videos,
+          mode: 'demo'
+        };
+      }
+
+      if (q.includes('cnc') || q.includes('milling') || q.includes('lathe') || q.includes('machinist') || q.includes('सीएनसी')) {
+        const item = KS_DEMO_KNOWLEDGE.cnc;
+        return {
+          answer: isHindi ? item.answer_hi : item.answer_en,
+          evidence: isHindi ? item.evidence_hi : item.evidence_en,
+          videos: item.videos,
+          mode: 'demo'
+        };
+      }
+
+      if (q.includes('fee') || q.includes('subsidy') || q.includes('pmkvy') || q.includes('free') || q.includes('cost') || q.includes('फीस') || q.includes('सब्सिडी') || q.includes('मुफ्त')) {
+        const item = KS_DEMO_KNOWLEDGE.subsidies;
+        return {
+          answer: isHindi ? item.answer_hi : item.answer_en,
+          evidence: isHindi ? item.evidence_hi : item.evidence_en,
+          videos: item.videos,
+          mode: 'demo'
+        };
+      }
+
+      // Default fallback demo response
+      if (isHindi) {
+        return {
+          answer: `[प्रदर्शन मोड] मैं प्रवेश पूर्व-आवश्यकताओं, वोकेशनल ट्रेड तुलना, और प्रामाणिक करियर यात्रा वीडियो की जानकारी दे सकता हूँ। आप **स्टेनलेस स्टील फैब्रिकेटर**, **वेल्डर**, **सीएनसी ऑपरेटर**, या **PMKVY फीस सब्सिडी** के बारे में पूछ सकते हैं। लाइव AI मॉडल से जुड़ने के लिए पोर्ट 8000 पर बैकएंड कनेक्ट करें।`,
+          evidence: ["NCVET व्यावसायिक मानक", "राष्ट्रीय योग्यता रजिस्टर (NQR)"],
+          videos: [
+            { title: "Watch Stainless Steel Fabricator Journey", channel: "Skill India Hub", url: "https://www.youtube.com/watch?v=P3WvU1uM9jM" }
+          ],
+          mode: 'demo'
+        };
+      }
+
+      return {
+        answer: `[Demonstration Mode] I can explain admission prerequisites, compare vocational trades, and link authentic career journey videos. Try asking about **Stainless Steel Fabricator**, **Welder**, **CNC Operator**, or **PMKVY Fee Subsidies**. To query live models, connect your FastAPI backend on port 8000.`,
+        evidence: ["NCVET Occupational Standards", "National Qualifications Register (NQR)"],
+        videos: [
+          { title: "Watch Stainless Steel Fabricator Journey", channel: "Skill India Hub", url: "https://www.youtube.com/watch?v=P3WvU1uM9jM" }
+        ],
+        mode: 'demo'
+      };
+    }
+
+    async function ksGetLiveBackendResponse(query, lang) {
+      const payload = {
+        message: query,
+        language: lang
+      };
+
+      const res = await fetch(`${KS_VOICE_CONFIG.API_BASE_URL}${KS_VOICE_CONFIG.CHAT_ENDPOINT}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (!res.ok) {
+        throw new Error(`Server returned HTTP ${res.status}`);
+      }
+
+      const data = await res.json();
+
+      // Optionally retrieve authentic career videos if inquiry asks for videos or mentions career
+      let careerVideos = [];
+      const lowerQ = query.toLowerCase();
+      let matchedCareer = null;
+      if (lowerQ.includes('fabricator') || lowerQ.includes('stainless steel')) matchedCareer = '2022/CCM/CGSC/06612';
+      else if (lowerQ.includes('welder') || lowerQ.includes('welding')) matchedCareer = 'welder';
+      else if (lowerQ.includes('cnc') || lowerQ.includes('milling')) matchedCareer = 'cnc';
+
+      if (matchedCareer) {
+        try {
+          const vRes = await fetch(`${KS_VOICE_CONFIG.API_BASE_URL}${KS_VOICE_CONFIG.CAREER_VIDEOS_ENDPOINT}/${encodeURIComponent(matchedCareer)}/videos?language=${lang}`);
+          if (vRes.ok) {
+            const vData = await vRes.json();
+            if (vData.categories) {
+              Object.values(vData.categories).forEach(catList => {
+                if (Array.isArray(catList)) {
+                  careerVideos = careerVideos.concat(catList.slice(0, 2));
+                }
+              });
+            }
+          }
+        } catch (vErr) {
+          console.log('[KaushalSetu Voice] Video fetch bypassed or non-fatal:', vErr);
+        }
+      }
+
+      return {
+        answer: data.answer,
+        evidence: data.retrieved_evidence_summary || [],
+        sources: data.official_sources_recommended || [],
+        disclaimers: data.disclaimers || [],
+        videos: careerVideos,
+        mode: 'live'
+      };
+    }
+
+    // =========================================================================
+    // Form Submit Handler
+    // =========================================================================
+    window.ksVoiceHandleSubmit = async function(event) {
+      if (event) event.preventDefault();
+      const query = ksTextInput.value.trim();
+      if (!query) return;
+
+      // Append User message
+      ksAppendMessage('user', query);
+      ksTextInput.value = '';
+      ksStopRecording();
+
+      // Show temporary typing indicator
+      const typingRow = document.createElement('div');
+      typingRow.className = 'ks-voice-msg-row ks-voice-msg-bot';
+      typingRow.id = 'ksVoiceTypingIndicator';
+      typingRow.innerHTML = `
+        <div class="ks-voice-msg-avatar">🤖</div>
+        <div class="ks-voice-bubble" style="color: #64748b; font-style: italic;">
+          Consulting National Qualifications Register...
+        </div>
+      `;
+      ksMsgContainer.appendChild(typingRow);
+      ksMsgContainer.scrollTop = ksMsgContainer.scrollHeight;
+
+      try {
+        let responseData;
+        if (ksCurrentMode === 'live') {
+          try {
+            responseData = await ksGetLiveBackendResponse(query, ksActiveLanguage);
+          } catch (liveErr) {
+            console.warn('[KaushalSetu Voice] Live query failed, falling back to Demo Mode:', liveErr);
+            ksSetMode('demo', 'Backend connection error during query');
+            responseData = await ksGetDemoResponse(query);
+            responseData.answer = `*(Connection error: Backend was unreachable. Showing verified knowledge demonstration:)*\n\n` + responseData.answer;
+          }
+        } else {
+          // Pure Demo Mode
+          responseData = await ksGetDemoResponse(query);
+        }
+
+        // Remove typing indicator
+        const typingEl = document.getElementById('ksVoiceTypingIndicator');
+        if (typingEl) typingEl.remove();
+
+        // Append Bot response
+        ksAppendMessage('bot', responseData.answer, {
+          evidence: responseData.evidence,
+          sources: responseData.sources,
+          videos: responseData.videos,
+          disclaimers: responseData.disclaimers,
+          mode: responseData.mode
+        });
+
+      } catch (err) {
+        const typingEl = document.getElementById('ksVoiceTypingIndicator');
+        if (typingEl) typingEl.remove();
+
+        ksAppendMessage('bot', `I encountered an unexpected issue while retrieving guidance. Please check your network or try again.`, { mode: 'demo' });
+      }
+    };
+
+    // =========================================================================
+    // Suggestion Chips Click Handler
+    // =========================================================================
+    if (ksChips) {
+      ksChips.addEventListener('click', (e) => {
+        const btn = e.target.closest('.ks-voice-chip');
+        if (btn) {
+          const query = btn.getAttribute('data-query');
+          if (query) {
+            ksTextInput.value = query;
+            ksInputForm.dispatchEvent(new Event('submit'));
+          }
+        }
+      });
+    }
+
+    // =========================================================================
+    // Auto-Initialization on Page Load
+    // =========================================================================
+    window.addEventListener('DOMContentLoaded', () => {
+      if (KS_VOICE_CONFIG.AUTO_CONNECT_BACKEND && KS_VOICE_CONFIG.MODE !== 'demo') {
+        ksCheckBackendConnection();
+      } else {
+        ksSetMode('demo');
+      }
+
+      // Pre-warm Speech Synthesis voices
+      if (window.speechSynthesis) {
+        window.speechSynthesis.getVoices();
+        window.speechSynthesis.onvoiceschanged = () => {
+          window.speechSynthesis.getVoices();
+        };
+      }
+    });
+  </script>
+</body>
+</html>

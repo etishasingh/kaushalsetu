@@ -1,0 +1,258 @@
+{
+  "career_referral_directory.csv": {
+    "rows": 20,
+    "cols": 13,
+    "columns": [
+      "referral_id",
+      "counsellor_or_centre_name",
+      "referral_type",
+      "qualification",
+      "specialty",
+      "languages",
+      "district",
+      "state",
+      "contact_details",
+      "appointment_availability",
+      "verification_status",
+      "last_verified",
+      "source_url"
+    ],
+    "missing_values": {
+      "qualification": 15
+    },
+    "duplicate_rows": 0,
+    "provenance_columns": [
+      "verification_status",
+      "last_verified",
+      "source_url"
+    ]
+  },
+  "counseling_concerns_evidence.csv": {
+    "rows": 100,
+    "cols": 12,
+    "columns": [
+      "session_id",
+      "concern_category",
+      "learner_concern",
+      "parent_concern",
+      "evidence_shown",
+      "evidence_gap",
+      "concern_resolved",
+      "follow_up_requested",
+      "escalation_reason",
+      "next_action",
+      "source_benchmark",
+      "session_date"
+    ],
+    "missing_values": {
+      "escalation_reason": 64
+    },
+    "duplicate_rows": 0,
+    "provenance_columns": [
+      "source_benchmark",
+      "session_date"
+    ]
+  },
+  "counseling_intake_profiles.csv": {
+    "rows": 100,
+    "cols": 11,
+    "columns": [
+      "session_id",
+      "language_preference",
+      "vocational_awareness",
+      "primary_concern",
+      "earning_timeline",
+      "preferred_evidence",
+      "decision_process",
+      "locality_preference",
+      "explanation_preference",
+      "profile_confidence",
+      "consent_status"
+    ],
+    "missing_values": {
+      "vocational_awareness": 43
+    },
+    "duplicate_rows": 0,
+    "provenance_columns": []
+  },
+  "labour_market_household_context.csv": {
+    "rows": 12,
+    "cols": 30,
+    "columns": [
+      "survey_name",
+      "survey_round_year",
+      "fsu_id",
+      "household_id",
+      "person_id",
+      "state_ut",
+      "district",
+      "sector",
+      "stratum",
+      "age",
+      "gender",
+      "social_group",
+      "household_size",
+      "household_monthly_consumption_expenditure",
+      "general_education_level",
+      "vocational_technical_training_status",
+      "training_field_trade",
+      "training_duration_weeks",
+      "usual_principal_activity_code",
+      "activity_status_description",
+      "broad_industry_nic",
+      "broad_occupation_nco",
+      "monthly_gross_earnings",
+      "hours_worked_last_7_days",
+      "has_job_contract",
+      "has_social_security_benefits",
+      "sampling_weight_multiplier",
+      "source_catalog_id",
+      "source_data_url",
+      "extraction_date"
+    ],
+    "missing_values": {
+      "training_duration_weeks": 1,
+      "monthly_gross_earnings": 1
+    },
+    "duplicate_rows": 0,
+    "provenance_columns": [
+      "source_catalog_id",
+      "source_data_url",
+      "extraction_date"
+    ]
+  },
+  "ncs_jobs.csv": {
+    "rows": 10,
+    "cols": 26,
+    "columns": [
+      "job_id",
+      "employer_id",
+      "employer_name",
+      "job_role",
+      "required_qualification",
+      "functional_area",
+      "job_city",
+      "job_district",
+      "job_state",
+      "pincode",
+      "commute_type",
+      "min_experience_years",
+      "max_experience_years",
+      "key_skills",
+      "salary_min",
+      "salary_max",
+      "salary_frequency",
+      "salary_raw_text",
+      "job_nature",
+      "shift_type",
+      "contract_duration",
+      "posting_date",
+      "expiry_date",
+      "verification_status",
+      "source_job_url",
+      "scraped_at"
+    ],
+    "missing_values": {},
+    "duplicate_rows": 0,
+    "provenance_columns": [
+      "posting_date",
+      "expiry_date",
+      "verification_status",
+      "source_job_url",
+      "scraped_at"
+    ]
+  },
+  "placement_earnings.csv": {
+    "rows": 33,
+    "cols": 11,
+    "columns": [
+      "provider_id",
+      "qualification_id",
+      "district",
+      "cohort_year",
+      "eligible_graduates",
+      "placed_graduates",
+      "median_monthly_earnings",
+      "earnings_sample_size",
+      "employment_definition",
+      "source",
+      "verification_date"
+    ],
+    "missing_values": {},
+    "duplicate_rows": 0,
+    "provenance_columns": [
+      "source",
+      "verification_date"
+    ]
+  },
+  "qualifications.csv": {
+    "rows": 107,
+    "cols": 12,
+    "columns": [
+      "qualification_id",
+      "qualification_title",
+      "job_role",
+      "sector",
+      "awarding_body",
+      "nsqf_level",
+      "eligibility",
+      "duration_hours",
+      "competencies",
+      "progression_pathway",
+      "source_url",
+      "last_verified"
+    ],
+    "missing_values": {
+      "job_role": 9,
+      "competencies": 2,
+      "progression_pathway": 4
+    },
+    "duplicate_rows": 0,
+    "provenance_columns": [
+      "source_url",
+      "last_verified"
+    ]
+  },
+  "training_providers.csv": {
+    "rows": 8,
+    "cols": 28,
+    "columns": [
+      "provider_id",
+      "centre_id",
+      "provider_name",
+      "centre_name",
+      "physical_address",
+      "district",
+      "state",
+      "course_name",
+      "qualification_id",
+      "nsqf_level",
+      "sector",
+      "awarding_body",
+      "affiliation_status",
+      "fee_amount",
+      "duration_hours",
+      "eligibility_criteria",
+      "admission_dates",
+      "facilities_available",
+      "practical_training_details",
+      "placement_claims",
+      "placement_evidence",
+      "reporting_period",
+      "contact_person",
+      "contact_email",
+      "contact_phone",
+      "source_sidh_url",
+      "source_nqr_url",
+      "last_verification_date"
+    ],
+    "missing_values": {},
+    "duplicate_rows": 0,
+    "provenance_columns": [
+      "admission_dates",
+      "source_sidh_url",
+      "source_nqr_url",
+      "last_verification_date"
+    ]
+  }
+}

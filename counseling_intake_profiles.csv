@@ -1,0 +1,101 @@
+﻿session_id,language_preference,vocational_awareness,primary_concern,earning_timeline,preferred_evidence,decision_process,locality_preference,explanation_preference,profile_confidence,consent_status
+S001,Bengali,Basic,Distance from home,Immediate,Employer records,Joint discussion,Within district,Visual diagrams,Confirmed,Consented
+S002,Bilingual,None,Income uncertainty,Immediate,Alumni testimonials,Joint discussion,Within district,Simple examples,Confirmed,Consented
+S003,Hindi,Basic,Course fee,Immediate,Alumni testimonials,Joint discussion,Near home,Visual diagrams,Initial,Consented
+S004,Telugu,Intermediate,Income uncertainty,Immediate,Government certification,Joint discussion,Near home,Data tables & salary proof,Initial,Consented
+S005,Bilingual,None,Income uncertainty,Immediate,Employer records,Peer influence,Within district,Peer stories,Confirmed,Consented
+S006,Hindi,None,Income uncertainty,Immediate,Alumni testimonials,Joint discussion,State capital,Data tables & salary proof,Confirmed,Consented
+S007,Bilingual,None,Placement certainty,Within 6 months,Employer records,Individual choice,State capital,Peer stories,Confirmed,Consented
+S008,Hindi,None,Societal stigma,Immediate,Employer records,Individual choice,Near home,Simple examples,Confirmed,Consented
+S009,Hindi,None,Distance from home,Within 6 months,Government certification,Parental decision,Within district,Visual diagrams,Confirmed,Consented
+S010,Hindi,Basic,Income uncertainty,Immediate,Physical lab visit,Joint discussion,Near home,Peer stories,Confirmed,Consented
+S011,Hindi,Intermediate,Distance from home,Immediate,Government certification,Parental decision,Near home,Peer stories,Confirmed,Consented
+S012,Hindi,None,Income uncertainty,Immediate,Government certification,Peer influence,Near home,Visual diagrams,Confirmed,Consented
+S013,Hindi,Intermediate,Income uncertainty,Immediate,Alumni testimonials,Joint discussion,Willing to relocate nationally,Peer stories,Confirmed,Consented
+S014,Hindi,None,Distance from home,Within 6 months,Employer records,Joint discussion,Within district,Simple examples,Initial,Consented
+S015,Hindi,Basic,Distance from home,Immediate,Government certification,Joint discussion,Within district,Visual diagrams,Confirmed,Consented
+S016,Hindi,None,Income uncertainty,Within 6 months,Government certification,Individual choice,Within district,Simple examples,Confirmed,Consented
+S017,Hindi,Advanced,Course fee,Within 12 months,Employer records,Parental decision,Willing to relocate nationally,Data tables & salary proof,Confirmed,Consented
+S018,English,Basic,Income uncertainty,Post-diploma / 2+ years,Government certification,Joint discussion,Within district,Data tables & salary proof,Confirmed,Consented
+S019,Bilingual,Basic,Income uncertainty,Immediate,Physical lab visit,Parental decision,Near home,Simple examples,Confirmed,Consented
+S020,Hindi,Basic,Course fee,Immediate,Alumni testimonials,Joint discussion,Near home,Peer stories,Confirmed,Consented
+S021,English,Basic,Placement certainty,Within 6 months,Employer records,Peer influence,Within district,Visual diagrams,Confirmed,Consented
+S022,Hindi,None,Course fee,Within 12 months,Alumni testimonials,Individual choice,Near home,Simple examples,Confirmed,Declined
+S023,Hindi,None,Placement certainty,Immediate,Physical lab visit,Peer influence,State capital,Simple examples,Confirmed,Consented
+S024,Hindi,Basic,Societal stigma,Within 12 months,Government certification,Joint discussion,Near home,Peer stories,Initial,Consented
+S025,Bilingual,Basic,Distance from home,Immediate,Alumni testimonials,Parental decision,State capital,Peer stories,Confirmed,Consented
+S026,Bilingual,Basic,Distance from home,Within 12 months,Physical lab visit,Joint discussion,Near home,Simple examples,Confirmed,Consented
+S027,Hindi,None,Distance from home,Immediate,Employer records,Parental decision,Near home,Simple examples,Confirmed,Consented
+S028,English,None,Income uncertainty,Immediate,Alumni testimonials,Parental decision,Within district,Peer stories,Confirmed,Consented
+S029,Hindi,Intermediate,Income uncertainty,Immediate,Physical lab visit,Joint discussion,State capital,Data tables & salary proof,Confirmed,Consented
+S030,Hindi,Basic,Course fee,Immediate,Physical lab visit,Parental decision,Within district,Visual diagrams,Confirmed,Consented
+S031,Bilingual,None,Income uncertainty,Immediate,Employer records,Parental decision,Within district,Data tables & salary proof,Initial,Consented
+S032,Hindi,None,Distance from home,Within 6 months,Government certification,Individual choice,Near home,Visual diagrams,Confirmed,Consented
+S033,Hindi,Basic,Placement certainty,Immediate,Alumni testimonials,Parental decision,State capital,Data tables & salary proof,Confirmed,Consented
+S034,Bengali,None,Placement certainty,Within 12 months,Employer records,Joint discussion,Near home,Simple examples,Initial,Consented
+S035,Hindi,Basic,Income uncertainty,Within 6 months,Employer records,Individual choice,Within district,Visual diagrams,Confirmed,Consented
+S036,Hindi,None,Distance from home,Within 6 months,Physical lab visit,Joint discussion,Near home,Peer stories,Confirmed,Consented
+S037,Hindi,Basic,Distance from home,Immediate,Physical lab visit,Joint discussion,State capital,Simple examples,Confirmed,Consented
+S038,Marathi,None,Income uncertainty,Within 12 months,Physical lab visit,Joint discussion,Within district,Simple examples,Confirmed,Consented
+S039,Bilingual,Intermediate,Placement certainty,Within 6 months,Employer records,Individual choice,State capital,Data tables & salary proof,Confirmed,Consented
+S040,Hindi,Basic,Course fee,Immediate,Employer records,Parental decision,Near home,Peer stories,Confirmed,Consented
+S041,Kannada,None,Income uncertainty,Within 6 months,Physical lab visit,Peer influence,Within district,Simple examples,Initial,Consented
+S042,English,Advanced,Course fee,Within 12 months,Employer records,Joint discussion,Near home,Data tables & salary proof,Confirmed,Consented
+S043,English,Advanced,Placement certainty,Within 6 months,Government certification,Individual choice,Willing to relocate nationally,Simple examples,Confirmed,Consented
+S044,Hindi,Advanced,Income uncertainty,Within 6 months,Physical lab visit,Joint discussion,Within district,Visual diagrams,Confirmed,Consented
+S045,Bilingual,None,Distance from home,Post-diploma / 2+ years,Government certification,Joint discussion,State capital,Data tables & salary proof,Confirmed,Consented
+S046,Hindi,None,Placement certainty,Post-diploma / 2+ years,Government certification,Parental decision,Near home,Peer stories,Confirmed,Consented
+S047,Bilingual,Intermediate,Distance from home,Within 6 months,Alumni testimonials,Peer influence,State capital,Simple examples,Initial,Consented
+S048,Kannada,None,Course fee,Immediate,Physical lab visit,Parental decision,State capital,Data tables & salary proof,Confirmed,Consented
+S049,Bilingual,Basic,Placement certainty,Within 12 months,Alumni testimonials,Parental decision,State capital,Peer stories,Confirmed,Consented
+S050,Tamil,Basic,Income uncertainty,Within 6 months,Alumni testimonials,Joint discussion,Near home,Visual diagrams,Confirmed,Consented
+S051,Bilingual,Basic,Distance from home,Within 12 months,Alumni testimonials,Joint discussion,Near home,Peer stories,Confirmed,Consented
+S052,Hindi,None,Income uncertainty,Immediate,Employer records,Joint discussion,State capital,Simple examples,Confirmed,Consented
+S053,Hindi,Intermediate,Societal stigma,Immediate,Physical lab visit,Parental decision,Near home,Data tables & salary proof,Confirmed,Consented
+S054,Hindi,None,Income uncertainty,Immediate,Employer records,Joint discussion,Near home,Visual diagrams,Initial,Consented
+S055,Hindi,Basic,Income uncertainty,Immediate,Employer records,Individual choice,Near home,Simple examples,Initial,Consented
+S056,Hindi,None,Distance from home,Within 12 months,Employer records,Parental decision,Near home,Simple examples,Confirmed,Consented
+S057,Hindi,Basic,Course fee,Immediate,Employer records,Joint discussion,Within district,Visual diagrams,Confirmed,Consented
+S058,Hindi,Basic,Placement certainty,Post-diploma / 2+ years,Employer records,Joint discussion,Within district,Data tables & salary proof,Confirmed,Consented
+S059,Hindi,None,Income uncertainty,Immediate,Employer records,Individual choice,State capital,Data tables & salary proof,Confirmed,Consented
+S060,Hindi,Basic,Distance from home,Within 12 months,Alumni testimonials,Joint discussion,Near home,Simple examples,Confirmed,Consented
+S061,Telugu,Basic,Course fee,Immediate,Employer records,Joint discussion,Near home,Simple examples,Confirmed,Consented
+S062,Hindi,Basic,Course fee,Within 12 months,Employer records,Joint discussion,Willing to relocate nationally,Peer stories,Confirmed,Consented
+S063,Bilingual,Intermediate,Course fee,Immediate,Employer records,Parental decision,Near home,Simple examples,Confirmed,Consented
+S064,Hindi,Basic,Income uncertainty,Immediate,Employer records,Joint discussion,Within district,Simple examples,Confirmed,Consented
+S065,Kannada,None,Distance from home,Immediate,Alumni testimonials,Parental decision,Within district,Data tables & salary proof,Confirmed,Consented
+S066,Bilingual,Advanced,Income uncertainty,Within 6 months,Physical lab visit,Individual choice,Near home,Visual diagrams,Confirmed,Consented
+S067,Bilingual,None,Income uncertainty,Immediate,Government certification,Parental decision,Within district,Simple examples,Confirmed,Consented
+S068,Hindi,None,Course fee,Immediate,Government certification,Joint discussion,Near home,Peer stories,Confirmed,Consented
+S069,English,None,Placement certainty,Within 6 months,Alumni testimonials,Individual choice,Within district,Visual diagrams,Confirmed,Consented
+S070,Hindi,Intermediate,Course fee,Within 12 months,Employer records,Joint discussion,State capital,Visual diagrams,Confirmed,Consented
+S071,Bilingual,None,Income uncertainty,Within 6 months,Employer records,Joint discussion,Within district,Peer stories,Confirmed,Consented
+S072,Hindi,None,Course fee,Within 12 months,Government certification,Parental decision,Near home,Peer stories,Initial,Consented
+S073,Hindi,None,Societal stigma,Within 12 months,Government certification,Parental decision,Within district,Peer stories,Initial,Consented
+S074,English,Intermediate,Placement certainty,Post-diploma / 2+ years,Employer records,Individual choice,Willing to relocate nationally,Visual diagrams,Confirmed,Consented
+S075,Hindi,Basic,Course fee,Immediate,Alumni testimonials,Parental decision,Near home,Simple examples,Confirmed,Consented
+S076,Hindi,None,Distance from home,Within 6 months,Employer records,Joint discussion,Near home,Simple examples,Confirmed,Consented
+S077,Hindi,Basic,Course fee,Immediate,Government certification,Individual choice,Willing to relocate nationally,Simple examples,Confirmed,Consented
+S078,Hindi,Basic,Income uncertainty,Within 6 months,Employer records,Peer influence,Near home,Simple examples,Initial,Consented
+S079,Hindi,Intermediate,Placement certainty,Within 12 months,Employer records,Joint discussion,State capital,Data tables & salary proof,Confirmed,Consented
+S080,Hindi,None,Course fee,Immediate,Employer records,Individual choice,Within district,Visual diagrams,Initial,Consented
+S081,Bilingual,None,Income uncertainty,Within 6 months,Employer records,Parental decision,Near home,Simple examples,Confirmed,Consented
+S082,Bilingual,None,Distance from home,Immediate,Alumni testimonials,Peer influence,Near home,Simple examples,Confirmed,Consented
+S083,Hindi,None,Placement certainty,Within 6 months,Employer records,Joint discussion,Near home,Data tables & salary proof,Confirmed,Consented
+S084,Hindi,None,Course fee,Within 12 months,Government certification,Joint discussion,Within district,Data tables & salary proof,Confirmed,Consented
+S085,Hindi,None,Distance from home,Within 6 months,Alumni testimonials,Joint discussion,Within district,Peer stories,Confirmed,Consented
+S086,Hindi,Intermediate,Income uncertainty,Immediate,Employer records,Joint discussion,Within district,Peer stories,Confirmed,Consented
+S087,Marathi,Intermediate,Course fee,Immediate,Alumni testimonials,Joint discussion,State capital,Simple examples,Confirmed,Consented
+S088,Hindi,Basic,Income uncertainty,Immediate,Employer records,Joint discussion,Near home,Simple examples,Confirmed,Consented
+S089,English,Intermediate,Placement certainty,Within 12 months,Employer records,Individual choice,Within district,Data tables & salary proof,Initial,Consented
+S090,Hindi,Intermediate,Course fee,Within 6 months,Alumni testimonials,Joint discussion,State capital,Data tables & salary proof,Confirmed,Consented
+S091,Bilingual,Basic,Placement certainty,Within 12 months,Employer records,Parental decision,Within district,Peer stories,Confirmed,Consented
+S092,Bilingual,Basic,Societal stigma,Within 12 months,Government certification,Parental decision,Near home,Data tables & salary proof,Initial,Declined
+S093,Hindi,Basic,Placement certainty,Immediate,Government certification,Peer influence,Near home,Visual diagrams,Confirmed,Consented
+S094,Tamil,Basic,Societal stigma,Within 6 months,Alumni testimonials,Parental decision,Near home,Visual diagrams,Confirmed,Consented
+S095,Bilingual,None,Course fee,Immediate,Employer records,Joint discussion,Within district,Simple examples,Confirmed,Consented
+S096,Hindi,None,Placement certainty,Immediate,Government certification,Joint discussion,Willing to relocate nationally,Visual diagrams,Confirmed,Consented
+S097,English,Intermediate,Placement certainty,Post-diploma / 2+ years,Physical lab visit,Joint discussion,State capital,Data tables & salary proof,Confirmed,Consented
+S098,Hindi,None,Income uncertainty,Immediate,Employer records,Individual choice,Willing to relocate nationally,Simple examples,Confirmed,Consented
+S099,Tamil,Basic,Income uncertainty,Immediate,Government certification,Peer influence,Within district,Visual diagrams,Initial,Declined
+S100,Tamil,Basic,Course fee,Immediate,Employer records,Joint discussion,Near home,Simple examples,Confirmed,Consented

@@ -1,0 +1,39 @@
+{
+  "evaluation_protocol": "Synthetic Expert-Annotated Heuristic Query Benchmark",
+  "sample_size_queries": 3,
+  "mean_precision_at_3": 1.0,
+  "mean_precision_at_5": 0.6667,
+  "mean_recall_at_5": 0.85,
+  "mean_reciprocal_rank": 1.0,
+  "catalogue_coverage_count": 15,
+  "catalogue_coverage_pct": 14.02,
+  "eligibility_engine_unit_accuracy": 1.0,
+  "results_by_query_group": {
+    "Manufacturing / Thermal & Arc Trades": {
+      "query": "welding fabrication manual metal arc shielded gas",
+      "precision_at_3": 1.0,
+      "precision_at_5": 0.8,
+      "recall_at_5": 0.8,
+      "reciprocal_rank": 1.0
+    },
+    "Precision Machining / Subtractive": {
+      "query": "cnc lathe machine milling operator programmer precision",
+      "precision_at_3": 1.0,
+      "precision_at_5": 0.6,
+      "recall_at_5": 0.75,
+      "reciprocal_rank": 1.0
+    },
+    "Automation & Instrumentation": {
+      "query": "process control instrumentation valve calibration automation",
+      "precision_at_3": 1.0,
+      "precision_at_5": 0.6,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0
+    }
+  },
+  "limitations_and_caveats": [
+    "Relevance labels represent internal engineering heuristics, NOT multi-annotator blind user trials.",
+    "Queries are synthetic test archetypes representing broad trade domains.",
+    "Metrics serve as non-regression unit tests, not validated production accuracy claims."
+  ]
+}

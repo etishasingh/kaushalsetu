@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0b0b">
+  <title>KAUSHALSETU — Career Guidance for Learners & Families</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div id="toast" class="toast" aria-live="polite"></div>
+
+  <!-- HOME -->
+  <section id="homeScreen" class="screen home-screen active">
+    <div class="doodle-field" aria-hidden="true">
+      <span class="doodle d-robot">◈</span>
+      <span class="doodle d-pcb">╔═╦══╗<br>╚═╩═◉╝</span>
+      <span class="doodle d-laptop">▱</span>
+      <span class="doodle d-wire">⌁───⌁</span>
+      <span class="doodle d-code">&lt;/&gt;</span>
+      <span class="doodle d-circuit">○──□──○</span>
+      <span class="doodle d-coat">♧</span>
+      <span class="doodle d-med">✚</span>
+      <span class="doodle d-law">⚖</span>
+      <span class="doodle d-chip">┌─┐<br>│▦│<br>└─┘</span>
+    </div>
+
+    <header class="landing-top">
+      <button class="wordmark" data-home>KAUSHALSETU</button>
+      <div class="landing-top-right">
+        <span class="mini-label">CAREER • SKILLS • DECISIONS</span>
+      </div>
+    </header>
+
+    <main class="hero-wrap">
+      <div class="hero-paper">
+        <div class="hero-kicker">A grounded career guidance system</div>
+        <h1>Find a path.<br><em>Choose with clarity.</em></h1>
+        <p class="hero-copy">
+          KaushalSetu helps learners and families explore vocational pathways using
+          qualification standards, eligibility rules, training evidence and labour-market context.
+        </p>
+        <button id="startBtn" class="green-button">
+          <span>Let's Get Started</span><span class="arrow">↗</span>
+        </button>
+        <div class="hero-note">Built around evidence — not promises.</div>
+      </div>
+    </main>
+
+    <footer class="landing-bottom">
+      <button class="text-link" data-modal="aboutModal">About</button>
+      <span class="footer-dot">•</span>
+      <button class="text-link" data-modal="sourceModal">Sources</button>
+      <span class="footer-spacer"></span>
+      <span class="footer-note">For learners & families</span>
+    </footer>
+  </section>
+
+  <!-- INTAKE -->
+  <section id="intakeScreen" class="screen app-screen">
+    <header class="app-nav">
+      <button class="nav-brand" data-home>KAUSHALSETU</button>
+      <div class="step-indicator"><span>01</span><i></i><span>YOUR PROFILE</span></div>
+      <button class="back-link" data-go="homeScreen">← Home</button>
+    </header>
+
+    <main class="page-shell intake-shell">
+      <div class="page-intro">
+        <span class="eyebrow">LET'S BEGIN</span>
+        <h2>Tell us what you're looking for.</h2>
+        <p>Your answers help the recommendation engine match you with suitable qualifications. We only send the fields needed by the counselling engine.</p>
+      </div>
+
+      <form id="learnerProfileForm" class="intake-form">
+        <section class="form-section">
+          <div class="section-number">01</div>
+          <div class="section-content">
+            <h3>Interest & work preference</h3>
+            <p class="form-hint">Think about the kind of work you would actually enjoy doing.</p>
+            <div class="field">
+              <label for="interests">Vocational interests / skills <span>*</span></label>
+              <input id="interests" required placeholder="e.g. electronics, welding, automotive, computers">
+              <small>Use commas to separate multiple interests.</small>
+            </div>
+            <div class="field">
+              <label for="preferredActivities">Preferred work activities</label>
+              <input id="preferredActivities" placeholder="e.g. repairing circuits, operating machines, designing">
+            </div>
+          </div>
+        </section>
+
+        <section class="form-section">
+          <div class="section-number">02</div>
+          <div class="section-content">
+            <h3>Education & experience</h3>
+            <div class="two-col">
+              <div class="field">
+                <label for="education">Highest education completed</label>
+                <select id="education">
+                  <option value="">Unspecified</option>
+                  <option value="Ability to read and write">Literate (Read / Write)</option>
+                  <option value="8th">8th Pass</option>
+                  <option value="10th">10th Pass</option>
+                  <option value="12th">12th Pass</option>
+                  <option value="ITI">ITI / NTC Certificate</option>
+                  <option value="Diploma">Polytechnic Diploma</option>
+                  <option value="Graduate">Graduate / Degree</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="experience">Prior experience (years)</label>
+                <input id="experience" type="number" min="0" max="40" step="0.5" value="0">
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="form-section">
+          <div class="section-number">03</div>
+          <div class="section-content">
+            <h3>Location & practical constraints</h3>
+            <div class="two-col">
+              <div class="field">
+                <label for="district">Current district</label>
+                <input id="district" placeholder="e.g. Kanpur Nagar">
+              </div>
+              <div class="field">
+                <label for="state">State</label>
+                <input id="state" placeholder="e.g. Uttar Pradesh">
+              </div>
+            </div>
+            <div class="two-col">
+              <div class="field">
+                <label for="relocation">Willingness to relocate</label>
+                <select id="relocation">
+                  <option value="near_home">Near home only</option>
+                  <option value="within_district">Within district</option>
+                  <option value="state_capital">Statewide / capital</option>
+                  <option value="nationally">Willing to relocate nationally</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="maxDuration">Maximum course duration (hours)</label>
+                <input id="maxDuration" type="number" min="10" max="3000" placeholder="Leave blank for no limit">
+              </div>
+            </div>
+            <div class="two-col">
+              <div class="field">
+                <label for="maxBudget">Maximum fee budget (₹)</label>
+                <input id="maxBudget" type="number" min="0" step="500" placeholder="Leave blank for no limit">
+                <small>Use 0 if you only want to consider government-subsidised options.</small>
+              </div>
+              <div class="field">
+                <label for="languagePref">Preferred explanation language</label>
+                <select id="languagePref">
+                  <option value="English">English</option>
+                  <option value="Hindi">हिंदी</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="advanced-section">
+          <button type="button" id="advancedToggle" class="advanced-toggle">
+            <span>Precision filters</span><span>＋</span>
+          </button>
+          <div id="advancedFields" class="advanced-fields hidden">
+            <label class="check-row"><input type="checkbox" id="excludeIneligible"><span>Exclude options where entry prerequisites are not met</span></label>
+            <label class="check-row"><input type="checkbox" id="excludeUnknownLocation"><span>Exclude options with unlinked local training centres</span></label>
+            <label class="check-row"><input type="checkbox" id="excludeUnknownFees"><span>Exclude options with unverified fees</span></label>
+          </div>
+        </section>
+
+        <div class="form-submit-row">
+          <span class="privacy-note">Your profile is used to generate this recommendation set.</span>
+          <button type="submit" id="submitBtn" class="green-button dark-text">Find my paths <span class="arrow">→</span></button>
+        </div>
+      </form>
+    </main>
+  </section>
+
+  <!-- RESULTS -->
+  <section id="resultsScreen" class="screen app-screen">
+    <header class="app-nav">
+      <button class="nav-brand" data-home>KAUSHALSETU</button>
+      <div class="step-indicator"><span>02</span><i></i><span>YOUR PATHS</span></div>
+      <button id="editProfileBtn" class="back-link">← Edit profile</button>
+    </header>
+
+    <main class="page-shell results-shell">
+      <div id="resultsLoading" class="loading-panel hidden">
+        <div class="loader-ring"></div>
+        <div><strong>Reading your profile...</strong><p>Matching interests, eligibility and evidence across the qualification catalogue.</p></div>
+      </div>
+
+      <div id="resultsError" class="message-panel error-panel hidden">
+        <strong>We couldn't generate your recommendations.</strong>
+        <p id="resultsErrorText">Check that the backend is running on port 8000.</p>
+        <button id="retryResults" class="outline-button">Try again</button>
+      </div>
+
+      <div id="resultsContent" class="hidden">
+        <div class="results-heading">
+          <div>
+            <span class="eyebrow">YOUR RECOMMENDATION SET</span>
+            <h2>Five paths worth exploring.</h2>
+            <p>These are ranked by relevance to your profile and the evidence available in the system.</p>
+          </div>
+          <div class="result-count" id="resultCount">05<br><span>OPTIONS</span></div>
+        </div>
+
+        <div id="recommendationRow" class="recommendation-row"></div>
+
+        <div class="family-note">
+          <span class="note-mark">✦</span>
+          <div><strong>Don't decide from the score alone.</strong><p>Open a career to see eligibility, training evidence, labour-market context, missing information and questions to ask a training centre.</p></div>
+        </div>
+
+        <div class="results-ai-cta">
+          <div>
+            <span class="eyebrow">NEED A SECOND OPINION?</span>
+            <h3>Ask the KaushalSetu counsellor.</h3>
+            <p>Compare paths, ask about eligibility, fees or what to verify before choosing.</p>
+          </div>
+          <button id="resultsChatBtn" class="green-button dark-text">Ask AI <span class="arrow">↗</span></button>
+        </div>
+      </div>
+    </main>
+  </section>
+
+  <!-- DETAIL -->
+  <section id="detailScreen" class="screen app-screen">
+    <header class="app-nav">
+      <button class="nav-brand" data-home>KAUSHALSETU</button>
+      <div class="step-indicator"><span>03</span><i></i><span>CAREER DETAIL</span></div>
+      <button id="backToResults" class="back-link">← All recommendations</button>
+    </header>
+
+    <main class="page-shell detail-shell">
+      <div id="detailLoading" class="loading-panel hidden">
+        <div class="loader-ring"></div><div><strong>Opening career record...</strong><p>Loading the evidence attached to this qualification.</p></div>
+      </div>
+      <div id="detailContent" class="hidden">
+        <div class="detail-hero">
+          <div>
+            <span class="eyebrow" id="detailSector">SECTOR</span>
+            <h2 id="detailTitle">Career title</h2>
+            <p id="detailRole" class="detail-role">Job role</p>
+            <div class="detail-tags" id="detailTags"></div>
+          </div>
+          <div class="detail-score"><span id="detailScore">100</span><small>RELEVANCE</small></div>
+        </div>
+
+        <div class="detail-grid">
+          <article class="info-card wide">
+            <div class="card-label">01 / WHY THIS PATH</div>
+            <h3>Recommendation reasoning</h3>
+            <div id="detailExplanation" class="prose"></div>
+            <div id="scoreBreakdown" class="score-breakdown"></div>
+          </article>
+
+          <article class="info-card">
+            <div class="card-label">02 / ELIGIBILITY</div>
+            <h3 id="eligibilityTitle">Unknown</h3>
+            <p id="eligibilityReason"></p>
+          </article>
+
+          <article class="info-card">
+            <div class="card-label">03 / COURSE</div>
+            <dl class="facts-list" id="courseFacts"></dl>
+          </article>
+
+          <article class="info-card">
+            <div class="card-label">04 / TRAINING EVIDENCE</div>
+            <div id="providerFacts" class="prose"></div>
+          </article>
+
+          <article class="info-card">
+            <div class="card-label">05 / LABOUR-MARKET CONTEXT</div>
+            <div id="employmentFacts" class="prose"></div>
+          </article>
+
+          <article class="info-card">
+            <div class="card-label">06 / WHAT TO VERIFY</div>
+            <ul id="missingFacts" class="clean-list"></ul>
+            <ul id="questionsList" class="question-list"></ul>
+          </article>
+        </div>
+
+        <section class="video-journey-panel" id="careerVideosPanel">
+          <div class="video-journey-head">
+            <div>
+              <span class="eyebrow">REAL-WORLD CONTEXT</span>
+              <h3>See the career in practice.</h3>
+              <p>Career-journey videos are practical experiences, not replacements for official qualification or admission information.</p>
+            </div>
+            <div class="video-controls">
+              <select id="videoLanguageSelect" class="video-select" aria-label="Video language">
+                <option value="English">English</option>
+                <option value="Hindi">हिंदी</option>
+              </select>
+              <button id="refreshVideosBtn" class="outline-button" type="button">Refresh videos ↻</button>
+            </div>
+          </div>
+          <div id="videoJourneyNotice" class="video-notice">Loading verified career-journey videos…</div>
+          <div id="videoCategoryTabs" class="video-category-tabs"></div>
+          <div id="careerVideoGrid" class="career-video-grid"></div>
+        </section>
+
+        <div class="detail-footer">
+          <div><span class="eyebrow">OFFICIAL RECORD</span><p id="sourceMeta"></p></div>
+          <div class="detail-actions">
+            <a id="nqrLink" class="outline-button" href="#" target="_blank" rel="noopener">Open NQR ↗</a>
+            <button id="detailChatBtn" class="green-button dark-text">Ask AI about this career <span class="arrow">↗</span></button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </section>
+
+  <!-- CHAT -->
+  <section id="chatScreen" class="screen app-screen">
+    <header class="app-nav">
+      <button class="nav-brand" data-home>KAUSHALSETU</button>
+      <div class="step-indicator"><span>AI</span><i></i><span>COUNSELLOR</span></div>
+      <button id="backFromChat" class="back-link">← Back</button>
+    </header>
+    <main class="page-shell chat-shell">
+      <div class="chat-intro">
+        <span class="eyebrow">KAUSHALSETU AI</span>
+        <h2>Ask before you decide.</h2>
+        <p>Ask about eligibility, compare careers, understand fees or investigate what you should verify. Answers are grounded in the project's evidence base.</p>
+      </div>
+      <div class="chat-layout">
+        <aside class="chat-context">
+          <div class="card-label">CURRENT CONTEXT</div>
+          <div id="chatContextTitle">General career guidance</div>
+          <p id="chatContextMeta">No career selected.</p>
+          <div class="chat-suggestions">
+            <button data-query="What are the entry requirements for this career?">What are the entry requirements?</button>
+            <button data-query="What should my family verify before choosing this career?">What should my family verify?</button>
+            <button data-query="How does this compare with another career?">Compare with another career</button>
+            <button data-query="Are the fees or subsidies verified?">Are the fees/subsidies verified?</button>
+          </div>
+        </aside>
+        <section class="chat-panel">
+          <div id="chatMessages" class="chat-messages">
+            <div class="chat-bubble bot">
+              <div class="bubble-label">KAUSHALSETU COUNSELLOR</div>
+              <p>Hi. Tell me what you're unsure about, and I'll help you investigate it using the available evidence.</p>
+            </div>
+          </div>
+          <div id="chatLoading" class="chat-loading hidden"><span class="mini-loader"></span>Checking the evidence base…</div>
+          <form id="counsellorChatForm" class="chat-form">
+            <button id="chatMicBtn" class="voice-button" type="button" title="Speak your question" aria-label="Speak your question">◉</button>
+            <input id="chatInput" maxlength="1000" placeholder="Ask a question…" autocomplete="off" required>
+            <button id="chatSendBtn" class="green-button dark-text" type="submit">Send <span>↗</span></button>
+          </form>
+          <div id="voiceStatus" class="voice-status hidden">Listening… speak naturally, then pause.</div>
+          <div class="chat-disclaimer">Evidence-grounded guidance • No employment guarantee • Verify current details with the official source</div>
+        </section>
+      </div>
+    </main>
+  </section>
+
+  <!-- ABOUT MODAL -->
+  <div id="aboutModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-card">
+      <button class="modal-close" data-close-modal>×</button>
+      <span class="eyebrow">ABOUT KAUSHALSETU</span>
+      <h2 id="aboutTitle">Career guidance built around evidence.</h2>
+      <p>KaushalSetu is designed for a learner and their family to explore vocational options together — not to make an automatic life decision for them.</p>
+      <div class="about-points">
+        <div><b>01</b><strong>Understand</strong><p>Your interests, education, experience and practical constraints shape the recommendation set.</p></div>
+        <div><b>02</b><strong>Compare</strong><p>Five ranked paths are presented with eligibility, training and labour-market evidence.</p></div>
+        <div><b>03</b><strong>Investigate</strong><p>Every career detail page highlights missing information and questions worth asking before enrolment.</p></div>
+      </div>
+      <p class="modal-footnote">The system does not guarantee a job, salary or admission. Current local availability and fees should always be verified.</p>
+    </div>
+  </div>
+
+  <!-- SOURCES MODAL -->
+  <div id="sourceModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="sourceTitle">
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-card source-card">
+      <button class="modal-close" data-close-modal>×</button>
+      <span class="eyebrow">DATA & PROVENANCE</span>
+      <h2 id="sourceTitle">Where the evidence comes from.</h2>
+      <p>The project's recommendation and counselling layers are built from the following datasets and official/public sources.</p>
+      <div class="source-list">
+        <div><strong>National Qualifications Register (NQR)</strong><span>Qualifications, NSQF level, eligibility, duration, competencies and official qualification records.</span><a href="https://nqr.gov.in" target="_blank" rel="noopener">nqr.gov.in ↗</a></div>
+        <div><strong>Skill India Digital Hub (SIDH)</strong><span>Training-centre/provider evidence and local availability records used in the project sample.</span><a href="https://www.skillindiadigital.gov.in" target="_blank" rel="noopener">skillindiadigital.gov.in ↗</a></div>
+        <div><strong>National Career Service (NCS)</strong><span>Employment/job evidence and career-centre/referral context included in the datasets.</span><a href="https://www.ncs.gov.in" target="_blank" rel="noopener">ncs.gov.in ↗</a></div>
+        <div><strong>DGT / Ministry & survey context</strong><span>Placement and earnings context is labelled as a benchmark, not a guaranteed individual salary.</span></div>
+      </div>
+      <div class="source-files"><strong>Project datasets</strong><span>qualifications.csv • training_providers.csv • ncs_jobs.csv • placement_earnings.csv • career_referral_directory.csv • counselling datasets</span></div>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

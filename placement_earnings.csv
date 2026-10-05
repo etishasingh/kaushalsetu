@@ -1,0 +1,34 @@
+﻿provider_id,qualification_id,district,cohort_year,eligible_graduates,placed_graduates,median_monthly_earnings,earnings_sample_size,employment_definition,source,verification_date
+DGT_ITI_NATIONAL,CTS_ALL,All India,2018,1250000,793750,14500.0,35000,"Employed + Self-Employed (63.5% total, 6.7% self-employed per MSDE Tracer Study)",PIB PRID 2226505,2026-10-03
+MSDE_PMKVY4_STT,STT_MULTI_SECTOR,All India,2024,450000,204299,12500.0,18500,Employed + Self-Employed (45.4% post-training per AJNIFM Evaluation),PIB PRID 2226505,2026-10-03
+MSDE_JSS_SCHEME,JSS_NON_FORMAL,All India,2025,3152000,2584640,9800.0,42000,Economically engaged within 6 months (82.0% per AJNIFM Evaluation),PIB PRID 2226505,2026-10-03
+MSDE_NAPS2_SCHEME,APPRENTICE_NAPS,All India,2025,4600000,3469000,11200.0,50000,Contractual Apprenticeship under PMNAPS-2 per AJNIFM,PIB PRID 2226505,2026-10-03
+ITI_UP_042,CTS_ELEC,Kanpur Nagar,2024,140,98,18500.0,72,Wage Employed + Self-Employed within 6-12 months per DGT STSR,DGT STSR Table 4 (Kanpur Nagar Survey),2026-10-03
+ITI_UP_042,CTS_FITT,Kanpur Nagar,2024,120,82,17200.0,65,Wage Employed + Self-Employed within 6-12 months per DGT STSR,DGT STSR Table 4 (Kanpur Nagar Survey),2026-10-03
+ITI_UP_042,CTS_WELD,Kanpur Nagar,2024,80,58,16800.0,48,Wage Employed + Self-Employed within 6-12 months per DGT STSR,DGT STSR Table 4 (Kanpur Nagar Survey),2026-10-03
+ITI_UP_042,CTS_TURN,Kanpur Nagar,2024,60,41,17500.0,35,Wage Employed + Self-Employed within 6-12 months per DGT STSR,DGT STSR Table 4 (Kanpur Nagar Survey),2026-10-03
+ITI_UP_042,CTS_COPA,Kanpur Nagar,2024,90,56,15500.0,50,Wage Employed + Self-Employed within 6-12 months per DGT STSR,DGT STSR Table 4 (Kanpur Nagar Survey),2026-10-03
+ITI_UP_001,CTS_ELEC,Lucknow,2024,160,112,19000.0,85,Wage Employed + Self-Employed within 6-12 months per DGT STSR,DGT STSR Table 4 (Lucknow Survey),2026-10-03
+ITI_UP_001,CTS_ELEC_MECH,Lucknow,2024,75,51,18200.0,42,Wage Employed + Self-Employed within 6-12 months per DGT STSR,DGT STSR Table 4 (Lucknow Survey),2026-10-03
+ITI_UP_001,CTS_FITT,Lucknow,2024,130,87,17600.0,68,Wage Employed + Self-Employed within 6-12 months per DGT STSR,DGT STSR Table 4 (Lucknow Survey),2026-10-03
+ITI_UP_015,CTS_ELEC,Varanasi,2024,110,73,17000.0,58,Wage Employed + Self-Employed within 6-12 months per DGT STSR,DGT STSR Table 4 (Varanasi Survey),2026-10-03
+ITI_UP_015,CTS_WELD,Varanasi,2024,70,48,16500.0,40,Wage Employed + Self-Employed within 6-12 months per DGT STSR,DGT STSR Table 4 (Varanasi Survey),2026-10-03
+ITI_MH_012,CTS_MACH,Pune,2024,100,76,21000.0,60,Wage Employed + Self-Employed within 6-12 months per DGT STSR,DGT STSR Table 4 (Pune Survey),2026-10-03
+ITI_MH_012,CTS_FITT,Pune,2024,120,92,20500.0,75,Wage Employed + Self-Employed within 6-12 months per DGT STSR,DGT STSR Table 4 (Pune Survey),2026-10-03
+ITI_MH_012,CTS_TOOL_DIE,Pune,2024,50,42,22500.0,38,Wage Employed + Self-Employed within 6-12 months per DGT STSR,DGT STSR Table 4 (Pune Survey),2026-10-03
+ITI_KA_005,CTS_ELEC_MECH,Bengaluru Urban,2024,110,84,21500.0,70,Wage Employed + Self-Employed within 6-12 months per DGT STSR,DGT STSR Table 4 (Bengaluru Urban Survey),2026-10-03
+ITI_KA_005,CTS_COPA,Bengaluru Urban,2024,85,65,19500.0,55,Wage Employed + Self-Employed within 6-12 months per DGT STSR,DGT STSR Table 4 (Bengaluru Urban Survey),2026-10-03
+ITI_KA_005,CTS_ELEC,Bengaluru Urban,2024,130,96,20800.0,78,Wage Employed + Self-Employed within 6-12 months per DGT STSR,DGT STSR Table 4 (Bengaluru Urban Survey),2026-10-03
+ITI_GJ_008,CTS_WELD,Ahmedabad,2024,90,67,18000.0,52,Wage Employed + Self-Employed within 6-12 months per DGT STSR,DGT STSR Table 4 (Ahmedabad Survey),2026-10-03
+ITI_GJ_008,CTS_FITT,Ahmedabad,2024,105,78,18500.0,62,Wage Employed + Self-Employed within 6-12 months per DGT STSR,DGT STSR Table 4 (Ahmedabad Survey),2026-10-03
+NCS_MCC_UP_KANPUR,CTS_ELEC_FITT,Kanpur Nagar,2025,3420,1840,16500.0,420,Reported Placed / Mobilized via NCS District Job Fair,NCS Portal (Model Career Centre Reports),2026-10-03
+NCS_MCC_UP_LUCKNOW,CTS_MULTI_TECH,Lucknow,2025,4150,2280,17000.0,510,Reported Placed / Mobilized via NCS District Job Fair,NCS Portal (Model Career Centre Reports),2026-10-03
+NCS_MCC_MH_PUNE,CTS_AUTO_MFG,Pune,2025,2950,1760,19500.0,390,Reported Placed / Mobilized via NCS District Job Fair,NCS Portal (Model Career Centre Reports),2026-10-03
+NCS_MCC_KA_BLR,CTS_IT_ITES,Bengaluru Urban,2025,3800,2410,21000.0,540,Reported Placed / Mobilized via NCS District Job Fair,NCS Portal (Model Career Centre Reports),2026-10-03
+NCS_MCC_RJ_JAIPUR,CTS_CIVIL_CONST,Jaipur,2025,2600,1350,15800.0,310,Reported Placed / Mobilized via NCS District Job Fair,NCS Portal (Model Career Centre Reports),2026-10-03
+NADA_PLFS_SURVEY,PLFS_VOC_ELECTRICAL,Uttar Pradesh,2024,1850,1240,18200.0,890,Principal Usual Activity Status (UPS) Employed with Formal Vocational Training,NADA PLFS (Annual Microdata Catalog),2026-10-03
+NADA_PLFS_SURVEY,PLFS_VOC_MECHANICAL,Maharashtra,2024,2100,1490,20400.0,1050,Principal Usual Activity Status (UPS) Employed with Formal Vocational Training,NADA PLFS (Annual Microdata Catalog),2026-10-03
+NADA_PLFS_SURVEY,PLFS_VOC_IT_COMP,Karnataka,2024,1650,1220,21500.0,840,Principal Usual Activity Status (UPS) Employed with Formal Vocational Training,NADA PLFS (Annual Microdata Catalog),2026-10-03
+NADA_PLFS_SURVEY,PLFS_VOC_AUTOMOTIVE,Tamil Nadu,2024,1400,980,17800.0,720,Principal Usual Activity Status (UPS) Employed with Formal Vocational Training,NADA PLFS (Annual Microdata Catalog),2026-10-03
+NADA_PLFS_SURVEY,PLFS_VOC_HEALTHCARE,Kerala,2024,1250,960,19200.0,650,Principal Usual Activity Status (UPS) Employed with Formal Vocational Training,NADA PLFS (Annual Microdata Catalog),2026-10-03
+NADA_PLFS_SURVEY,PLFS_VOC_CONSTRUCT,Rajasthan,2024,1900,1180,16200.0,910,Principal Usual Activity Status (UPS) Employed with Formal Vocational Training,NADA PLFS (Annual Microdata Catalog),2026-10-03
